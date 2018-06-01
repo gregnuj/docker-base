@@ -13,9 +13,11 @@ RUN locale-gen en_US.UTF-8 && \
     export LANGUAGE=en_US.UTF-8 && \
     export LANG=en_US.UTF-8
 
+# Set the environment variable for package install
+ENV DEBIAN_FRONTEND noninteractive
+
 # Install packages
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get -y install \
+RUN apt-get -y install \
         bash \
         curl \
         git \
