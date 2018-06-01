@@ -29,9 +29,6 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
 RUN /usr/sbin/adduser -D -G wheel -k /etc/skel -s /bin/bash user && \
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-USER user
-WORKDIR /home/user
-
 ENV SHELL=/bin/bash \
     EDITOR=/usr/local/bin/vim
 
