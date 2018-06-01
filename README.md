@@ -1,2 +1,2 @@
-# docker-base
-ubuntu with supervisord
+# docker-cyclops-base
+ubuntu base image
