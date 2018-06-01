@@ -1,6 +1,6 @@
-LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
-
 FROM ubuntu:16.04
+
+LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 # Update existing packages.
 RUN apt-get update 
