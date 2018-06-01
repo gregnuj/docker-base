@@ -7,9 +7,14 @@ RUN apk add --no-cache \
         sudo \
         bash \
         curl \
-        ncurses \
         git \
+        libice \
+        libsm \
+        libx11 \
+        libxt \
+        ncurses \
         openssl \
+        sudo \
         supervisor
 
 # get vim from jare/alpine-vim (uses alpine:latest)
