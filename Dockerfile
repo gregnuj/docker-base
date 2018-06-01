@@ -1,4 +1,3 @@
-
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 FROM ubuntu:16.04
