@@ -1,25 +1,16 @@
-FROM ubuntu:16.04
+FROM alpine:3.7
+
 
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
-# Update existing packages.
-RUN apt-get update 
-
-# Set the environment variable for package install
-ENV DEBIAN_FRONTEND noninteractive
-
 # Install packages
-RUN apt-get -y install \
+RUN apk add --no-cache \
         sudo \
+        bash \
         curl \
         git \
         openssl \
         supervisor \
         vim
-RUN apt-get -y clean
 
-# Set vim as default editor
-RUN update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
-
-# User
-RUN useradd guest
+CMD ["/usr/bin/bash"]
