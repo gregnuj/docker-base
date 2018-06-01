@@ -32,3 +32,5 @@ else
 	_COL_USER=$COL_GRE
 	_p=">"
 fi
+
+COLORIZED_PROMPT="${_COL_USER}\u${COL_WHI}@${COL_YEL}\h${COL_WHI}:${COL_BLU}\w${_p}\[\e[m\]"
