@@ -26,4 +26,4 @@ RUN apt-get -y install \
         vim
 RUN apt-get -y clean
 
-CMD ["/run.sh"]
+CMD ["bash"]
