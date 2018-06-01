@@ -7,6 +7,7 @@ RUN apk add --no-cache \
         sudo \
         bash \
         curl \
+        ncurses \
         git \
         openssl \
         supervisor
