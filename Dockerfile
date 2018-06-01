@@ -24,4 +24,4 @@ RUN DEBIAN_FRONTEND=noninteractive \
         vim
 RUN apt-get -y clean
 
-CMD ["/cyclops/bin/start.sh"]
+CMD ["/run.sh"]
