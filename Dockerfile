@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install packages
 RUN apt-get -y install \
+        sudo \
         curl \
         git \
         openssl \
@@ -19,3 +20,6 @@ RUN apt-get -y clean
 
 # Set vim as default editor
 RUN update-alternatives --install /usr/bin/editor editor /usr/bin/vim 100
+
+# User
+RUN useradd guest
