@@ -1,2 +1,2 @@
 # docker-cyclops-base
-ubuntu base image
+cyclops base image
