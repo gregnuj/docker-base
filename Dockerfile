@@ -7,8 +7,10 @@ RUN apt-get update && apt-get install -y \
                 git \
 		curl \
 		cron \
-                vim \
+                oprnssl \
+		socat \
                 supervisor \
+		vim \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
 CMD ["/bin/bash"]
