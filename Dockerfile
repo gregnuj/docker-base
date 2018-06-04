@@ -6,6 +6,7 @@ LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 RUN apt-get update && apt-get install -y \
                 git \
 		curl \
+		cron \
                 vim \
                 supervisor \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
