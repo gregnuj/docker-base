@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
                 git \
 		curl \
 		cron \
-                oprnssl \
+                openssl \
 		socat \
                 supervisor \
 		vim \
