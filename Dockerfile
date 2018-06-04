@@ -4,7 +4,6 @@ LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 # Install packages
 RUN apk add --no-cache \
-        sudo \
         bash \
         curl \
         git \
@@ -14,6 +13,7 @@ RUN apk add --no-cache \
         libxt \
         ncurses \
         openssl \
+        socat \
         sudo \
         supervisor
 
