@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
 		cron \
                 openssl \
 		socat \
+		sudo \
                 supervisor \
 		vim \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
