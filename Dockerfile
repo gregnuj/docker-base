@@ -4,9 +4,9 @@ LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 # Install packages
 RUN apt-get update && apt-get install -y \
-                git \
 		curl \
 		cron \
+		git \
                 openssl \
 		socat \
 		sudo \
