@@ -3,7 +3,8 @@ FROM alpine:3.7
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 # Install packages
-RUN apk add --no-cache \
+RUN set -ex \
+        && apk add --no-cache \
         bash \
         curl \
         git \
