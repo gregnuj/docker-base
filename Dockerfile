@@ -3,7 +3,9 @@ FROM debian:stretch-slim
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
 # Install packages
-RUN apt-get update && apt-get install -y \
+RUN set -ex \
+	&& apt-get update 
+	&& apt-get install -y \
 		curl \
 		cron \
 		git \
@@ -12,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 		sudo \
                 supervisor \
 		vim \
-	--no-install-recommends && rm -r /var/lib/apt/lists/*
+	--no-install-recommends 
+	&& rm -r /var/lib/apt/lists/*
 
 CMD ["/bin/bash"]
