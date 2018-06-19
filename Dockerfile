@@ -19,6 +19,7 @@ RUN set -ex \
 		sudo \
                 supervisor \
 		vim \
+		wget \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/*
 
