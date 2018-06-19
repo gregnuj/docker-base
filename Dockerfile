@@ -20,7 +20,8 @@ RUN set -ex \
         openssh \
         socat \
         sudo \
-        supervisor
+        supervisor \
+        wget 
 
 # get vim from jare/alpine-vim (uses alpine:latest)
 COPY --from=jare/alpine-vim /usr/local/bin/ /usr/local/bin
