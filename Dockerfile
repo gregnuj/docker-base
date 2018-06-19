@@ -2,6 +2,9 @@ FROM debian:stretch-slim
 
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
+# To enable build behind proxy
+ARG http_proxy
+
 # Install packages
 RUN set -ex \
 	&& apt-get update \
