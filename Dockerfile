@@ -9,7 +9,7 @@ RUN set -ex \
 		curl \
 		cron \
 		git \
-		openssh \
+		ssh \
                 openssl \
 		socat \
 		sudo \
