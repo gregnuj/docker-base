@@ -14,6 +14,7 @@ RUN set -ex \
         libxt \
         ncurses \
         openssl \
+        openssh \
         socat \
         sudo \
         supervisor
