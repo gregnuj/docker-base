@@ -37,10 +37,13 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
     cp /etc/skel/.bashrc /root/.bashrc
 
 # Setup user
-RUN /usr/sbin/adduser -D -G wheel -k /etc/skel -s /bin/bash user && \
+RUN /usr/sbin/adduser -D -G wheel -s /bin/bash cyclops && \
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+USER cyclops
 
 ENV SHELL=/bin/bash \
     EDITOR=/usr/local/bin/vim
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["-l"]
