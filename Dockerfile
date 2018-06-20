@@ -45,6 +45,6 @@ USER cyclops
 ENV SHELL=/bin/bash \
     EDITOR=/usr/local/bin/vim
 
-WORKDIR ~
+WORKDIR /home/cyclops
 ENTRYPOINT ["/bin/bash"]
 CMD ["-l"]
