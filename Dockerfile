@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
-
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
+USER root
 
 # To enable build behind proxy
 ARG http_proxy
@@ -23,4 +23,14 @@ RUN set -ex \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/*
 
-CMD ["/bin/bash"]
+# Setup user
+RUN /usr/sbin/adduser --disabled-password -u 100 -G wheel -s /bin/bash cyclops && \
+    echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+ENV SHELL=/bin/bash \
+    EDITOR=/usr/local/bin/vim
+
+USER cyclops
+WORKDIR /home/cyclops
+ENTRYPOINT ["/bin/bash"]
+CMD ["-l"]
