@@ -40,11 +40,10 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
 RUN /usr/sbin/adduser -D -u 100 -G wheel -s /bin/bash cyclops && \
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-USER cyclops
-
 ENV SHELL=/bin/bash \
     EDITOR=/usr/local/bin/vim
 
+USER cyclops
 WORKDIR /home/cyclops
 ENTRYPOINT ["/bin/bash"]
 CMD ["-l"]
