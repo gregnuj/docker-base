@@ -24,7 +24,7 @@ RUN set -ex \
 	&& rm -r /var/lib/apt/lists/*
 
 # Setup user
-RUN /usr/sbin/adduser --disabled-password -u 100 -G wheel -s /bin/bash cyclops && \
+RUN /usr/sbin/adduser --disabled-password --uid 100 --group wheel --shell /bin/bash cyclops && \
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ENV SHELL=/bin/bash \
