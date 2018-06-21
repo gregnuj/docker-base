@@ -1,7 +1,8 @@
 # print motd
-IF [ -z "$SUDO_UID" ]; then
-    [ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd
-FI
+[ -z "$SUDO_UID" ] && 
+[ ! -z "$TERM" ] && 
+[ -r /etc/motd ] && 
+cat /etc/motd
 
 # append to the history file, don't overwrite it
 shopt -s histappend
