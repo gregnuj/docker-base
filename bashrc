@@ -1,5 +1,5 @@
 # print motd
-[ ! -z "$TERM" -a -r /etc/motd -a ! -f ~/.hushlogin ] && cat /etc/issue && cat /etc/motd
+[ ! -z "$TERM" -a -z $SUDO_UID -a -r /etc/motd ] && cat /etc/motd
 
 # append to the history file, don't overwrite it
 shopt -s histappend
