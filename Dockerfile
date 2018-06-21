@@ -1,6 +1,6 @@
 FROM alpine:3.7
-
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
+USER root
 
 # To enable build behind proxy
 ARG http_proxy
