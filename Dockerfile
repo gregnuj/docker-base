@@ -1,6 +1,6 @@
 FROM alpine:edge
-
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
+USER root
 
 # To enable build behind proxy
 ARG http_proxy
@@ -43,4 +43,7 @@ RUN /usr/sbin/adduser -D -G wheel -k /etc/skel -s /bin/bash user && \
 ENV SHELL=/bin/bash \
     EDITOR=/usr/local/bin/vim
 
-CMD ["/bin/bash"]
+USER cyclops
+WORKDIR /home/cyclops
+ENTRYPOINT ["/bin/bash"]
+CMD ["-l"]
