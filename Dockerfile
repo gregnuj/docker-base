@@ -9,18 +9,18 @@ ARG http_proxy
 RUN set -ex \
 	&& apt-get update \
 	&& apt-get install -y \
-	    apt-transport-https \
-		ca-certificates \
-		curl \
-		cron \
-		git \
-		ssh \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        cron \
+        git \
+        ssh \
         openssl \
-		socat \
-		sudo \
+        socat \
+        sudo \
         supervisor \
-		vim \
-		wget \
+        vim \
+        wget \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/*
 
