@@ -33,5 +33,4 @@ ENV SHELL=/bin/bash \
 
 USER cyclops
 WORKDIR /home/cyclops
-ENTRYPOINT ["/bin/bash"]
-CMD ["-l"]
+CMD ["/bin/bash", "-l"]
