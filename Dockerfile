@@ -9,15 +9,16 @@ ARG http_proxy
 RUN set -ex \
 	&& apt-get update \
 	&& apt-get install -y \
+	    apt-transport-https \
 		ca-certificates \
 		curl \
 		cron \
 		git \
 		ssh \
-                openssl \
+        openssl \
 		socat \
 		sudo \
-                supervisor \
+        supervisor \
 		vim \
 		wget \
 	--no-install-recommends \
