@@ -27,10 +27,7 @@ RUN set -ex \
 COPY --from=jare/alpine-vim /usr/local/bin/ /usr/local/bin
 COPY --from=jare/alpine-vim /usr/local/share/vim/ /usr/local/share/vim/
 
-ADD ./bashrc /etc/bash.bashrc
-ADD ./bashrc /etc/skel/.bashrc
-ADD ./profile /etc/profile
-ADD ./motd /etc/motd
+ADD ./rootfs /
 
 # Set Root to bash not ash and overwrite .bashrc
 RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
@@ -45,5 +42,6 @@ ENV SHELL=/bin/bash \
 
 USER cyclops
 WORKDIR /home/cyclops
-ENTRYPOINT ["/bin/bash"]
-CMD ["-l"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/bin/bash", "-l"]
+
