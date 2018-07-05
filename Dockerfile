@@ -24,9 +24,7 @@ RUN set -ex \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/*
 
-# Setup user
-RUN /usr/sbin/adduser --disabled-password --uid 999 --gid 10 --shell /bin/bash cyclops && \
-
+# Add files
 ADD ./rootfs /
 
 RUN /usr/sbin/adduser -D -u 999 -G wheel -s /bin/bash cyclops && \
