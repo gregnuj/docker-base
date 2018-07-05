@@ -26,6 +26,10 @@ RUN set -ex \
 
 # Setup user
 RUN /usr/sbin/adduser --disabled-password --uid 999 --gid 10 --shell /bin/bash cyclops && \
+
+ADD ./rootfs /
+
+RUN /usr/sbin/adduser -D -u 999 -G wheel -s /bin/bash cyclops && \
     echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ENV SHELL=/bin/bash \
@@ -33,4 +37,6 @@ ENV SHELL=/bin/bash \
 
 USER cyclops
 WORKDIR /home/cyclops
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash", "-l"]
+
