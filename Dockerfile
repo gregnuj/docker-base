@@ -14,9 +14,10 @@ RUN set -ex \
         curl \
         cron \
         git \
-        ssh \
+        gnupg2 \
         openssl \
         socat \
+        ssh \
         sudo \
         supervisor \
         vim \
