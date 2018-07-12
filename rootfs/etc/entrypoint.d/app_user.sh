@@ -11,7 +11,7 @@ addgroup --gid ${APP_UID} ${APP_USER}
 adduser --disabled-login --uid ${APP_UID} --group ${APP_USER} ${APP_USER}
 
 if [ -n "${APP_SUDO}" ]; then
-    echo "${APP_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 fi
 
 mkdir -p ${APP_SSH}
