@@ -28,13 +28,20 @@ RUN set -ex \
 # Add files
 ADD ./rootfs /
 
-RUN /usr/sbin/adduser --disabled-password --uid 999 --gid 10 --shell /bin/bash cyclops && \ 
-    echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+# Set Root to bash not ash and overwrite .bashrc
+RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
+    cp /etc/skel/.bashrc /root/.bashrc
 
-ENV SHELL=/bin/bash \
-    EDITOR=/usr/local/bin/vim
+# Setup user
+ENV SHELL="/bin/bash" \
+    EDITOR="/usr/local/bin/vim"
+    APP_ID="10000"
+    APP_USER="cyclops"
+    APP_HOME="/home/cyclops"
+    APP_SSH="/home/cyclops/.ssh"
+    APP_KEY="/home/cyclops/.ssh/id_rsa"
+    APP_AUTH="/home/cyclops/.ssh/authorized_keys"
 
-USER cyclops
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash", "-l"]
