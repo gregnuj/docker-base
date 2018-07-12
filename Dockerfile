@@ -34,13 +34,16 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
     cp /etc/skel/.bashrc /root/.bashrc
 
 # Setup user
-RUN /usr/sbin/adduser -D -u 999 -G wheel -s /bin/bash cyclops && \
-    echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+ENV SHELL="/bin/bash" \
+    EDITOR="/usr/local/bin/vim"
+    APP_ID="10000"
+    APP_USER="cyclops"
+    APP_HOME="/home/cyclops"
+    APP_SSH="/home/cyclops/.ssh"
+    APP_KEY="/home/cyclops/.ssh/id_rsa"
+    APP_AUTH="/home/cyclops/.ssh/authorized_keys"
 
-ENV SHELL=/bin/bash \
-    EDITOR=/usr/local/bin/vim
 
-USER cyclops
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash", "-l"]
