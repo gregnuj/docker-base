@@ -14,6 +14,7 @@ adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
 
 if [ -n "${APP_SUDO}" ]; then
     echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.profile
 fi
 
 mkdir -p ${APP_SSH}
