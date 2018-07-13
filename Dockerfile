@@ -47,4 +47,3 @@ ENV SHELL="/bin/bash" \
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash", "-l"]
-
