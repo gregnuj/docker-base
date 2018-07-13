@@ -14,12 +14,16 @@ adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
 
 if [ -n "${APP_SUDO}" ]; then
     echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.profile
 fi
 
 mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
     cp ${APP_KEY} ${APP_KEY}
     ssh-keygen -y -f ${APP_KEY} > ${APP_AUTH}
+else
+    ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
+    cp ${APP_KEY}.pub ${APP_AUTH}
 fi
 
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
