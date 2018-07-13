@@ -8,6 +8,8 @@ ARG http_proxy
 # Install packages
 RUN set -ex \
         && apk add --no-cache \
+        openssl \
+        openssh \
         bash \
         curl \
         git \
@@ -16,8 +18,6 @@ RUN set -ex \
         libx11 \
         libxt \
         ncurses \
-        openssl \
-        openssh \
         socat \
         sudo \
         supervisor \
