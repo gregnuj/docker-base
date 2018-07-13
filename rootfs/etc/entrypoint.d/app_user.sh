@@ -8,8 +8,8 @@ APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
 APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
 APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 
-addgroup -G ${APP_UID} ${APP_USER}
-adduser -D -U ${APP_UID} -G ${APP_USER} ${APP_USER}
+addgroup -g ${APP_UID} ${APP_USER}
+adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
 
 if [ -n "${APP_SUDO}" ]; then
     echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
