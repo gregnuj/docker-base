@@ -21,6 +21,8 @@ mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
     cp ${APP_KEY} ${APP_KEY}
     ssh-keygen -y -f ${APP_KEY} > ${APP_AUTH}
+else
+    ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
 fi
 
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
