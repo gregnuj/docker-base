@@ -23,6 +23,7 @@ if [ -f "${APP_KEY}" ]; then
     ssh-keygen -y -f ${APP_KEY} > ${APP_AUTH}
 else
     ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
+    cp ${APP_KEY}.pub ${APP_AUTH}
 fi
 
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
