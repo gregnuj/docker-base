@@ -39,14 +39,20 @@ ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
     APP_USER="cyclops" \
     APP_UID="10000" \
-    APP_SUDO=""  \ # defaults to user
-    APP_GROUP="" \ # defaults to user
-    APP_GID=""   \ # defaults to UID
-    APP_HOME=""  \ # defaults to /home/$USER
-    APP_SSH=""   \ # defaults to /home/$APP_USER/.ssh
-    APP_KEY=""   \ # defaults to /home/$APP_USER/.ssh/id_rsa
-    APP_AUTH=""    # defaults to /home/$APP_USER/.ssh/authorized_keys
- 
+    # defaults to user
+    APP_SUDO=""  \ 
+    # defaults to user
+    APP_GROUP="" \ 
+    # defaults to UID
+    APP_GID=""   \ 
+    # defaults to /home/$USER
+    APP_HOME=""  \ 
+    # defaults to /home/$APP_USER/.ssh
+    APP_SSH=""   \ 
+    # defaults to /home/$APP_USER/.ssh/id_rsa
+    APP_KEY=""   \ 
+    # defaults to /home/$APP_USER/.ssh/authorized_keys
+    APP_AUTH=""    
 
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
