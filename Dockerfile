@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.8
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 USER root
 
@@ -36,8 +36,10 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
 # Setup user
 ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
-    APP_ID="10000" \
     APP_USER="cyclops" \
+    APP_UID="10000" \
+    APP_GID="10000" \
+    APP_SUDO="cyclops" \
     APP_SUDO="cyclops" \
     APP_HOME="/home/cyclops" \
     APP_SSH="/home/cyclops/.ssh" \
@@ -48,4 +50,3 @@ ENV SHELL="/bin/bash" \
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash", "-l"]
-
