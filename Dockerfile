@@ -38,6 +38,7 @@ ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
     APP_USER="cyclops" \
     APP_UID="10000" \
+    APP_GID="10000" \
     APP_SUDO="cyclops" \
     APP_SUDO="cyclops" \
     APP_HOME="/home/cyclops" \
