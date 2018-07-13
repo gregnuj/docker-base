@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_ID="${APP_UID:-10000}"
+APP_UID="${APP_UID:-10000}"
 APP_USER="${APP_USER:-cyclops}"
 APP_HOME="${APP_HOME:-/home/${APP_USER}}"
 APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
