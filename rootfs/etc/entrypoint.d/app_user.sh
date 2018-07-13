@@ -2,6 +2,7 @@
 
 APP_SUDO="${APP_SUDO}"
 APP_UID="${APP_UID:-10000}"
+APP_GID="${APP_GID:-${APP_UID}}"
 APP_USER="${APP_USER:-cyclops}"
 APP_HOME="${APP_HOME:-/home/${APP_USER}}"
 APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
