@@ -31,9 +31,9 @@ RUN set -ex \
 ADD ./rootfs /
 
 # Set Root to bash not ash and overwrite .bashrc
-RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
-    cp /etc/skel/.bashrc /root/.bashrc \
-    mkdir -p /var/run/sshd
+RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
+    && cp /etc/skel/.bashrc /root/.bashrc \
+    && mkdir -p /var/run/sshd
 
 # Setup environment
 ENV SHELL="/bin/bash" \
