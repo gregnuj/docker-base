@@ -25,24 +25,31 @@ RUN set -ex \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/*
 
-# Add files
+# add files in rootfs
 ADD ./rootfs /
 
 # Set Root to bash not ash and overwrite .bashrc
 RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
     cp /etc/skel/.bashrc /root/.bashrc
 
-# Setup user
+# Setup environment
 ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
     APP_UID="10000" \
-    APP_GID="10000" \
-    APP_USER="cyclops" \
-    APP_SUDO="cyclops" \
-    APP_HOME="/home/cyclops" \
-    APP_SSH="/home/cyclops/.ssh" \
-    APP_KEY="/home/cyclops/.ssh/id_rsa" \
-    APP_AUTH="/home/cyclops/.ssh/authorized_keys"
+    # defaults to user
+    APP_SUDO=""  \ 
+    # defaults to user
+    APP_GROUP="" \ 
+    # defaults to UID
+    APP_GID=""   \ 
+    # defaults to /home/$USER
+    APP_HOME=""  \ 
+    # defaults to /home/$APP_USER/.ssh
+    APP_SSH=""   \ 
+    # defaults to /home/$APP_USER/.ssh/id_rsa
+    APP_KEY=""   \ 
+    # defaults to /home/$APP_USER/.ssh/authorized_keys
+    APP_AUTH=""    
 
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
