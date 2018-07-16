@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# copy configs to desired locations
+# this allows swarm configs to be modified
+
 CONFIG_DIR="${CONFIG_DIR:-/var/run/configs}"
 
 mkdir -p ${CONFIG_DIR}
