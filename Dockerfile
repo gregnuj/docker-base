@@ -20,12 +20,9 @@ RUN set -ex \
         libx11 \
         libxt \
         ncurses \
-<<<<<<< HEAD
-=======
         nmap \
         openssl \
         openssh \
->>>>>>> master
         socat \
         sudo \
         supervisor \
