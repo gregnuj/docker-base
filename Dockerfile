@@ -13,6 +13,7 @@ RUN set -ex \
         ca-certificates \
         curl \
         cron \
+        dnsutils \
         git \
         gnupg2 \
         openssl \
@@ -20,6 +21,7 @@ RUN set -ex \
         ssh \
         sudo \
         supervisor \
+        telnet \
         vim \
         wget \
 	--no-install-recommends \
