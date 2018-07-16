@@ -11,6 +11,8 @@ RUN set -ex \
         openssl \
         openssh \
         bash \
+        bind-tools \
+        busybox-extras \
         curl \
         git \
         libice \
@@ -18,6 +20,12 @@ RUN set -ex \
         libx11 \
         libxt \
         ncurses \
+<<<<<<< HEAD
+=======
+        nmap \
+        openssl \
+        openssh \
+>>>>>>> master
         socat \
         sudo \
         supervisor \
@@ -56,4 +64,4 @@ ENV SHELL="/bin/bash" \
 
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["/bin/bash", "-l"]
+CMD ["/usr/bin/supervisord", "-n"]
