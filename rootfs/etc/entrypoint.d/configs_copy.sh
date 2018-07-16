@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# copy configs to desired locations
+# copy swarm configs to root
 # this allows swarm configs to be modified
 
 CONFIG_DIR="${CONFIG_DIR:-/var/run/configs}"
