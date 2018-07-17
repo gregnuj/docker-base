@@ -22,6 +22,7 @@ RUN set -ex \
         sudo \
         supervisor \
         telnet \
+        unzip \
         vim \
         wget \
 	--no-install-recommends \
