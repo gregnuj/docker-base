@@ -8,8 +8,6 @@ ARG http_proxy
 # Install packages
 RUN set -ex \
         && apk add --no-cache \
-        openssl \
-        openssh \
         bash \
         bind-tools \
         busybox-extras \
