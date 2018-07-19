@@ -7,11 +7,13 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-        && apk add --no-cache \
-        bash \
-        bind-tools \
-        busybox-extras \
+	&& apt-get update \
+	&& apt-get install -y \
+        apt-transport-https \
+        ca-certificates \
         curl \
+        cron \
+        dnsutils \
         git \
         libice \
         libsm \
@@ -19,16 +21,20 @@ RUN set -ex \
         libxt \
         ncurses \
         nmap \
+        gnupg2 \
         #openssl \
         openssh \
+        openssl \
         socat \
+        ssh \
         sudo \
         supervisor \
-        wget
-
-# get vim from jare/alpine-vim (uses alpine:latest)
-COPY --from=jare/alpine-vim /usr/local/bin/ /usr/local/bin
-COPY --from=jare/alpine-vim /usr/local/share/vim/ /usr/local/share/vim/
+        telnet \
+        unzip \
+        vim \
+        wget \
+	--no-install-recommends \
+	&& rm -r /var/lib/apt/lists/*
 
 # add files in rootfs
 ADD ./rootfs /
@@ -41,15 +47,17 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
 # Setup environment
 ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
-    APP_USER="cyclops" \
-    APP_UID="10000" \
-    # defaults to user
-    APP_SUDO=""  \ 
-    # defaults to user
+    # defaults to 'cyclops'
+    APP_USER=""  \ 
+    # defaults to 10000
+    APP_UID="" \
+    # defaults to $APP_USER
     APP_GROUP="" \ 
-    # defaults to UID
+    # defaults to $APP_UID
+    APP_SUDO=""  \ 
+    # defaults to $APP_USER
     APP_GID=""   \ 
-    # defaults to /home/$USER
+    # defaults to /home/$APP_USER
     APP_HOME=""  \ 
     # defaults to /home/$APP_USER/.ssh
     APP_SSH=""   \ 
