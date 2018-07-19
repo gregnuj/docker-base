@@ -1,14 +1,14 @@
 #!/bin/bash
 
-APP_USER="${APP_USER:-cyclops}"
-APP_GROUP="${APP_GROUP:-${APP_USER}}"
-APP_SUDO="${APP_SUDO:-${APP_USER}}"
-APP_UID="${APP_UID:-10000}"
-APP_GID="${APP_GID:-${APP_UID}}"
-APP_HOME="${APP_HOME:-/home/${APP_USER}}"
-APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
-APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
-APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
+export APP_USER="${APP_USER:-cyclops}"
+export APP_GROUP="${APP_GROUP:-${APP_USER}}"
+export APP_SUDO="${APP_SUDO:-${APP_USER}}"
+export APP_UID="${APP_UID:-10000}"
+export APP_GID="${APP_GID:-${APP_UID}}"
+export APP_HOME="${APP_HOME:-/home/${APP_USER}}"
+export APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
+export APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
+export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 
 groupadd -g ${APP_GID} ${APP_USER}
 useradd -u ${APP_UID} -g ${APP_GID} ${APP_USER}

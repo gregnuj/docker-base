@@ -11,6 +11,6 @@ cd ${CONFIG_DIR}
 for dir in $(ls); do
 	for file in $(find $dir -type f); do
 		mkdir -p /$(dirname ${file})
-		cp ${CONFIG_DIR}/${file} /$file
+		cp -fv ${CONFIG_DIR}/${file} /$file
 	done
 done

@@ -39,14 +39,17 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
 # Setup environment
 ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
-    APP_UID="10000" \
-    # defaults to user
-    APP_SUDO=""  \ 
-    # defaults to user
+    # defaults to 'cyclops'
+    APP_USER=""  \ 
+    # defaults to 10000
+    APP_UID="" \
+    # defaults to $APP_USER
     APP_GROUP="" \ 
-    # defaults to UID
+    # defaults to $APP_UID
+    APP_SUDO=""  \ 
+    # defaults to $APP_USER
     APP_GID=""   \ 
-    # defaults to /home/$USER
+    # defaults to /home/$APP_USER
     APP_HOME=""  \ 
     # defaults to /home/$APP_USER/.ssh
     APP_SSH=""   \ 
