@@ -70,3 +70,4 @@ EXPOSE 22
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
+
