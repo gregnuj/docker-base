@@ -7,13 +7,11 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-	&& apt-get update \
-	&& apt-get install -y \
-        apt-transport-https \
-        ca-certificates \
+        && apk add --no-cache \
+        bash \
+        bind-tools \
+        busybox-extras \
         curl \
-        cron \
-        dnsutils \
         git \
         libice \
         libsm \
@@ -21,23 +19,25 @@ RUN set -ex \
         libxt \
         ncurses \
         nmap \
-        gnupg2 \
-        #openssl \
-        openssh \
         openssl \
+        openssh \
         socat \
-        ssh \
         sudo \
         supervisor \
-        telnet \
         unzip \
-        vim \
-        wget \
-	--no-install-recommends \
-	&& rm -r /var/lib/apt/lists/*
+        wget
+
+# get vim from jare/alpine-vim (uses alpine:latest)
+COPY --from=jare/alpine-vim /usr/local/bin/ /usr/local/bin
+COPY --from=jare/alpine-vim /usr/local/share/vim/ /usr/local/share/vim/
 
 # add files in rootfs
 ADD ./rootfs /
+
+# Set Root to bash not ash and overwrite .bashrc
+RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
+cp /etc/skel/.bashrc /root/.bashrc
+
 
 # Set Root to bash not ash and overwrite .bashrc
 RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
