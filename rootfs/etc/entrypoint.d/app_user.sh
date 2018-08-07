@@ -16,7 +16,7 @@ if [ "${APP_UID}" -lt 256000 ]; then
     adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
 else 
     # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
-    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::/home/user:" >> /etc/passwd
+    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:" >> /etc/passwd
     echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
     cp /etc/skel ${APP_HOME} && chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
