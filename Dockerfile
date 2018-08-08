@@ -22,6 +22,7 @@ RUN set -ex \
     nodejs \
     openssl \
     openssh \
+    php7 \
     socat \
     sudo \
     supervisor \
@@ -63,7 +64,9 @@ ENV SHELL="/bin/bash" \
     # defaults to /home/$APP_USER/.ssh/id_rsa
     APP_KEY=""   \ 
     # defaults to /home/$APP_USER/.ssh/authorized_keys
-    APP_AUTH=""    
+    APP_AUTH="" \   
+    # install webconsole
+    WEBCONSOLE_INSTALL=""
 
 EXPOSE 22
 WORKDIR /home/cyclops
