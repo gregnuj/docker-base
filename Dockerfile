@@ -7,26 +7,30 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-	&& apt-get update \
-	&& apt-get install -y \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        cron \
-        dnsutils \
-        git \
-        gnupg2 \
-        openssl \
-        socat \
-        ssh \
-        sudo \
-        supervisor \
-        telnet \
-        unzip \
-        vim \
-        wget \
-	--no-install-recommends \
-	&& rm -r /var/lib/apt/lists/*
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    cron \
+    dnsutils \
+    git \
+    gnupg2 \
+    nodejs \
+    openssl \
+    socat \
+    ssh \
+    sudo \
+    supervisor \
+    telnet \
+    unzip \
+    vim \
+    wget \
+    yarn \
+    --no-install-recommends \
+    && rm -r /var/lib/apt/lists/*
 
 # add files in rootfs
 ADD ./rootfs /
