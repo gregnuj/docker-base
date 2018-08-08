@@ -16,9 +16,7 @@ RUN set -ex \
     dnsutils \
     git \
     gnupg2 \
-    nodejs \
     openssl \
-    php7 \
     socat \
     ssh \
     sudo \
@@ -33,8 +31,12 @@ RUN set -ex \
 RUN set -ex \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && curl -sS https://packages.sury.org/php/apt.gpg > /etc/apt/trusted.gpg.d/php.gpg \ 
+    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
     && apt-get update \
     && apt-get install -y \
+    nodejs \
+    php7.2 \
     yarn \
     --no-install-recommends \
     && rm -r /var/lib/apt/lists/*
