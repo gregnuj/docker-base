@@ -71,7 +71,7 @@ ENV SHELL="/bin/bash" \
     # install webconsole
     WEBCONSOLE_INSTALL=""
 
-EXPOSE 22
+EXPOSE 22 8000
 WORKDIR /home/cyclops
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
