@@ -18,7 +18,7 @@ RUN set -ex \
     gnupg2 \
     nodejs \
     openssl \
-    php7.2 \
+    php7 \
     socat \
     ssh \
     sudo \
