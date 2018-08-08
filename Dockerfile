@@ -7,28 +7,28 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-        && apk add --no-cache \
-        bash \
-        bind-tools \
-        busybox-extras \
-        curl \
-        git \
-        libice \
-        libsm \
-        libx11 \
-        libxt \
-        ncurses \
-        nmap \
-        nodejs \
-        openssl \
-        openssh \
-        socat \
-        sudo \
-        supervisor \
-        unzip \
-        vim \
-        wget \
-        yarn 
+    && apk add --no-cache \
+    bash \
+    bind-tools \
+    busybox-extras \
+    curl \
+    git \
+    libice \
+    libsm \
+    libx11 \
+    libxt \
+    ncurses \
+    nmap \
+    nodejs \
+    openssl \
+    openssh \
+    socat \
+    sudo \
+    supervisor \
+    unzip \
+    vim \
+    wget \
+    yarn 
 
 # add files in rootfs
 ADD ./rootfs /
