@@ -7,8 +7,6 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && apt-get install -y \
     apt-transport-https \
@@ -29,6 +27,14 @@ RUN set -ex \
     unzip \
     vim \
     wget \
+    --no-install-recommends \
+    && rm -r /var/lib/apt/lists/*
+
+RUN set -ex \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y \
     yarn \
     --no-install-recommends \
     && rm -r /var/lib/apt/lists/*
