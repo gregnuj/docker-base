@@ -7,28 +7,29 @@ ARG http_proxy
 
 # Install packages
 RUN set -ex \
-        && apk add --no-cache \
-        bash \
-        bind-tools \
-        busybox-extras \
-        curl \
-        git \
-        libice \
-        libsm \
-        libx11 \
-        libxt \
-        ncurses \
-        nmap \
-        nodejs \
-        openssl \
-        openssh \
-        socat \
-        sudo \
-        supervisor \
-        unzip \
-        vim \
-        wget \
-        yarn 
+    && apk add --no-cache \
+    bash \
+    bind-tools \
+    busybox-extras \
+    curl \
+    git \
+    libice \
+    libsm \
+    libx11 \
+    libxt \
+    ncurses \
+    nmap \
+    nodejs \
+    openssl \
+    openssh \
+    php7 \
+    socat \
+    sudo \
+    supervisor \
+    unzip \
+    vim \
+    wget \
+    yarn 
 
 # add files in rootfs
 ADD ./rootfs /
@@ -63,7 +64,9 @@ ENV SHELL="/bin/bash" \
     # defaults to /home/$APP_USER/.ssh/id_rsa
     APP_KEY=""   \ 
     # defaults to /home/$APP_USER/.ssh/authorized_keys
-    APP_AUTH=""    
+    APP_AUTH="" \   
+    # install webconsole
+    WEBCONSOLE_INSTALL=""
 
 EXPOSE 22
 WORKDIR /home/cyclops
