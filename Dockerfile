@@ -19,17 +19,16 @@ RUN set -ex \
         libxt \
         ncurses \
         nmap \
+        nodejs \
         #openssl \
         openssh \
         socat \
         sudo \
         supervisor \
         unzip \
-        wget
-
-# get vim from jare/alpine-vim (uses alpine:latest)
-COPY --from=jare/alpine-vim /usr/local/bin/ /usr/local/bin
-COPY --from=jare/alpine-vim /usr/local/share/vim/ /usr/local/share/vim/
+        vim \
+        wget \
+        yarn 
 
 # add files in rootfs
 ADD ./rootfs /
