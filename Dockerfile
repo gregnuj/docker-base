@@ -23,6 +23,7 @@ RUN set -ex \
     openssl \
     openssh \
     php7 \
+    php7-json \
     socat \
     sudo \
     supervisor \
