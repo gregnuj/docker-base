@@ -37,6 +37,7 @@ RUN set -ex \
     && apt-get install -y \
     nodejs \
     php7.2 \
+    php7.2-json \
     yarn \
     --no-install-recommends \
     && rm -r /var/lib/apt/lists/*
