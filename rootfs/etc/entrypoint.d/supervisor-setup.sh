@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# globals
+export APP_USER="${APP_USER:-cyclops}"
+
+# locals
+SUPERVISOR_INI=${SUPERVISOR_INI}
+
 # links supervisord files to debian location
 
 if [ -d "/etc/supervisor/conf.d" ]; then
@@ -7,3 +13,21 @@ if [ -d "/etc/supervisor/conf.d" ]; then
 		ln -s $file /etc/supervisor/conf.d/$(basename $file '.ini').conf
 	done
 fi
+
+# Get supervisor password
+SUPERVISOR_SECRET="${SUPERVISOR_SECRET:-/var/run/secrets/app_password}"
+if [ -z "${APP_PASSWD}" ]; then
+	# Create webconsole secret if it does not exist
+	if [ ! -f "${SUPERVISOR_SECRET}" ]; then
+		openssl rand -base64 10 > ${SUPERVISOR_SECRET}
+	fi
+	APP_PASSWD="$(echo -n $(cat ${SUPERVISOR_SECRET}))"
+fi
+
+
+# Set supervisor user/password 
+sed -i \
+	-e "s/^user = .*$/user = ${APP_USER}/" \
+	-e "s/^password = .*$/password = ${APP_PASSWD}/" \
+	${WEBCONSOLE_PHP}
+
