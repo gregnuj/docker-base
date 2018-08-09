@@ -55,6 +55,8 @@ ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
     # defaults to 'cyclops'
     APP_USER=""  \ 
+    # defaults to random
+    APP_PASSWD=""  \ 
     # defaults to 10000
     APP_UID="" \
     # defaults to $APP_USER
