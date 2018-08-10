@@ -19,5 +19,5 @@ if [ ! -d "${ADMINER_DIR}" ]; then
 fi
 
 # set/fix permissions for dbninja
-chown -R ${APP_USER}:${APP_GROUP} ${ADMINER_DIR}
+chown -R ${APP_USER}:${APP_GROUP} ${ADMINER_BASE}
 
