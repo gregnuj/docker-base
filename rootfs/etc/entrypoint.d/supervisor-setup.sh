@@ -2,9 +2,7 @@
 
 # globals
 export APP_USER="${APP_USER:-cyclops}"
-
-# locals
-SUPERVISOR_INI=${SUPERVISOR_INI}
+export SUPERVISOR_INI=${SUPERVISOR_INI:-/etc/supervisor.d/default.ini}
 
 # links supervisord files to debian location
 
@@ -29,5 +27,5 @@ fi
 sed -i \
 	-e "s/^user = .*$/user = ${APP_USER}/" \
 	-e "s/^password = .*$/password = ${APP_PASSWD}/" \
-	${WEBCONSOLE_PHP}
+	${SUPERVISOR_INI}
 

@@ -39,6 +39,7 @@ else
     cp ${APP_KEY}.pub ${APP_AUTH}
 fi
 
+# needed for setup.ini
 chown -R ${APP_USER}:${APP_USER} /var/www
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
 
