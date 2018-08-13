@@ -37,4 +37,6 @@ fi
 # needed for setup.ini
 chown -R ${APP_USER}:${APP_USER} /var/www
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
+chmod 400 ${APP_KEY}
+chmod 444 ${APP_AUTH}
 
