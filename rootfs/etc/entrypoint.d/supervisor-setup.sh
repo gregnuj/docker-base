@@ -25,7 +25,7 @@ fi
 
 # Set supervisor user/password 
 sed -i \
-	-e "s/^user = .*$/user = ${APP_USER}/" \
+	-e "s/^username = .*$/username = ${APP_USER}/" \
 	-e "s/^password = .*$/password = ${APP_PASSWD}/" \
 	${SUPERVISOR_INI}
 
