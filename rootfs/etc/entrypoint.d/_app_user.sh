@@ -32,7 +32,8 @@ echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.profile
 
 mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
-    cp ${APP_KEY} ${APP_SSH}/
+    cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
+    chmod 400 ${APP_SSH}/$(basename ${APP_KEY})
     ssh-keygen -y -f ${APP_KEY} > ${APP_AUTH}
 else
     ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
@@ -42,6 +43,3 @@ fi
 # needed for setup.ini
 chown -R ${APP_USER}:${APP_USER} /var/www
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
-chmod 400 ${APP_KEY}
-chmod 444 ${APP_AUTH}
-
