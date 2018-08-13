@@ -20,6 +20,7 @@ if [ -n "$PROJECT_GIT_URL" ]; then
 	if [ ! "$(ls -A ${PROJECT_DIR})" ]; then
 		git clone -b "$PROJECT_GIT_BRANCH" "$PROJECT_GIT_URL" "$PROJECT_DIR"
 	fi
+	cd $PROJECT_DIR
 	if [ -f "./composer.json" ]; then
 		composer update
 	fi
