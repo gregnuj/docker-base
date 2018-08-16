@@ -24,6 +24,7 @@ RUN set -ex \
     openssh \
     php7 \
     php7-json \
+    rsync \
     socat \
     sudo \
     supervisor \
