@@ -5,9 +5,11 @@ if [ -z ${ADMINER_INSTALL} ]; then
 	exit 0
 fi
 
+# globals
+export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"
+export ADMINER_DIR="${ADMINER_DIR:-${HTDOCS_DIR}/adminer}"
+
 # locals
-ADMINER_BASE="${ADMINER_BASE:-/var/www/html/}"
-ADMINER_DIR="${ADMINER_DIR:-${ADMINER_BASE}/adminer}"
 ADMINER_URL="https://github.com/vrana/adminer/releases/download/v4.6.3/adminer-4.6.3.php"
 
 
@@ -19,5 +21,5 @@ if [ ! -d "${ADMINER_DIR}" ]; then
 fi
 
 # set/fix permissions for dbninja
-chown -R ${APP_USER}:${APP_GROUP} ${ADMINER_BASE}
+chown -R ${APP_USER}:${APP_GROUP} ${HTDOCS_DIR}
 
