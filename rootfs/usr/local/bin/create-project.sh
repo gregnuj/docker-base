@@ -6,8 +6,8 @@
 export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export APP_EMAIL="${APP_EMAIL:-${APP_USER}@localhost}"
-export PROJECT_BASE="${PROJECT_BASE:-$(pwd)}"
-export PROJECT_DIR="${PROJECT_DIR:-${PROJECT_BASE}/${APP_NAME}}"
+export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"
+export PROJECT_DIR="${PROJECT_DIR:-${HTDOCS_DIR}/${APP_NAME}}"
 export PROJECT_GIT_URL="${PROJECT_GIT_URL}"
 export PROJECT_GIT_BRANCH="${PROJECT_GIT_BRANCH:-master}"
 
