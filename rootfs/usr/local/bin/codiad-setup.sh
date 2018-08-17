@@ -9,7 +9,7 @@ fi
 export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export PROJECT_DIR="${PROJECT_DIR:-$(pwd)/${APP_NAME}}"
-export CODIAD_BASE="${CODIAD_BASE:-/var/www/html/${APP_NAME}-codiad}"
+export CODIAD_BASE="${CODIAD_BASE:-/var/www/html/codiad}"
 export CODIAD_DATA="${CODIAD_DATA:-${CODIAD_BASE}/data}"
 
 # settings files

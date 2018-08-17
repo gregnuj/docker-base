@@ -7,7 +7,7 @@ fi
 
 # locals
 ADMINER_BASE="${ADMINER_BASE:-/var/www/html/}"
-ADMINER_DIR="${ADMINER_DIR:-${ADMINER_BASE}/${APP_NAME}-adminer}"
+ADMINER_DIR="${ADMINER_DIR:-${ADMINER_BASE}/adminer}"
 ADMINER_URL="https://github.com/vrana/adminer/releases/download/v4.6.3/adminer-4.6.3.php"
 
 
