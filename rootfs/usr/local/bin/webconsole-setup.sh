@@ -23,6 +23,7 @@ WEBCONSOLE_SECRET="${WEBCONSOLE_SECRET:-/var/run/secrets/app_password}"
 if [ ! -e "${WEBCONSOLE_DIR}" ]; then
     wget ${WEBCONSOLE_URL}
     unzip ${WEBCONSOLE_ZIP} -d ${HTDOCS_DIR}
+    mv ${HTDOCS_DIR}/webconsole ${WEBCONSOLE_DIR}
     rm ${WEBCONSOLE_ZIP}
 fi
 
