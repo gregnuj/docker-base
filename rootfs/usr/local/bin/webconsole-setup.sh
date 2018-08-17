@@ -33,7 +33,7 @@ if [ -z "${APP_PASSWD}" ]; then
 	if [ ! -f "${WEBCONSOLE_SECRET}" ]; then
 		openssl rand -base64 10 > ${WEBCONSOLE_SECRET}
 	fi
-	APP_PASSWD="$(echo -n $(cat ${WEBCONSOLE_SECRET}) | sha256sum | awk '{print $1}')"
+	APP_PASSWD="$(echo -n $(sudo cat ${WEBCONSOLE_SECRET}) | sha256sum | awk '{print $1}')"
 fi
 
 # Set weconsole user/password 
