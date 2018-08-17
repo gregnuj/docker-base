@@ -9,8 +9,9 @@ fi
 export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export PROJECT_DIR="${PROJECT_DIR:-$(pwd)/${APP_NAME}}"
-export CODIAD_BASE="${CODIAD_BASE:-/var/www/html/codiad}"
-export CODIAD_DATA="${CODIAD_DATA:-${CODIAD_BASE}/data}"
+export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"
+export CODIAD_DIR="${CODIAD_DIR:-${HTDOCS_DIR}/codiad}"
+export CODIAD_DATA="${CODIAD_DATA:-${CODIAD_DIR}/data}"
 
 # settings files
 CODIAD_SECRET="${CODIAD_SECRET:-/var/run/secrets/app_password}"
@@ -20,13 +21,13 @@ CODIAD_USERS="${CODIAD_USERS:-${CODIAD_DATA}/users.php}"
 CODIAD_TZ="${CODIAD_TZ:-America/Chicago}"
 
 # Download and install
-if [ ! -e "${CODIAD_BASE}" ]; then
-	git clone https://github.com/Codiad/Codiad ${CODIAD_BASE}
-	sed -i -e 's/mb_ord/xmb_ord/g' -e 's/mb_chr/xmb_chr/g' ${CODIAD_BASE}/lib/diff_match_patch.php
+if [ ! -e "${CODIAD_DIR}" ]; then
+	git clone https://github.com/Codiad/Codiad ${CODIAD_DIR}
+	sed -i -e 's/mb_ord/xmb_ord/g' -e 's/mb_chr/xmb_chr/g' ${CODIAD_DIR}/lib/diff_match_patch.php
 fi
 
 # set/fix permissions for codiad
-chown -R ${APP_USER}:${APP_GROUP} ${CODIAD_BASE}
+chown -R ${APP_USER}:${APP_GROUP} ${CODIAD_DIR}
 
 # populate users
 if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJECTS}" ]]; then
@@ -38,7 +39,7 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 		fi
 		APP_PASSWD="$(cat ${CODIAD_SECRET})"
 	fi
-	DATA="path=${CODIAD_BASE}"
+	DATA="path=${CODIAD_DIR}"
 	DATA+="&username=${APP_USER}"
 	DATA+="&password=${APP_PASSWD}"
 	DATA+="&password_confirm=${APP_PASSWD}"
@@ -50,7 +51,7 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 	for file in ${CODIAD_DATA}/*.php; do
 		rm $file
 	done
-	curl -sS http://127.0.0.1/codiad/components/install/process.php --data "${DATA}"
+	curl -sS http://127.0.0.1/$(basename $CODIAD_DIR)/components/install/process.php --data "${DATA}"
 fi
 
 
