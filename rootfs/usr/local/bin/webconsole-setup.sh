@@ -43,7 +43,9 @@ sed -i \
 	-e "s/^\$PASSWORD_HASH_ALGORITHM = .*\$/\$PASSWORD_HASH_ALGORITHM = \"sha256\";/" \
 	${WEBCONSOLE_PHP}
 
-ln -s ${WEBCONSOLE_PHP} ${WEBCONSOLE_DIR}/index.php
+if [ ! -e "${WEBCONSOLE_DIR}/index.php" ]; then
+    ln -s ${WEBCONSOLE_PHP} ${WEBCONSOLE_DIR}/index.php
+fi 
 
 # set/fix permissions for webconsole
 chown -R ${APP_USER}:${APP_GROUP} ${WEBCONSOLE_DIR}

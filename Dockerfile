@@ -47,7 +47,7 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     && mkdir -p /var/run/sshd
 
 # Setup environment
-ENV SHELL="/bin/bash" \
+    ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
     # defaults to 'cyclops'
     APP_USER=""  \ 
@@ -69,11 +69,18 @@ ENV SHELL="/bin/bash" \
     APP_KEY=""   \ 
     # defaults to /home/$APP_USER/.ssh/authorized_keys
     APP_AUTH="" \   
+    # install adminer
+    ADMINER_INSTALL="" \
+    ADMINER_DIR="/var/www/html/adminer" \
+    # install codiad
+    CODIAD_INSTALL="" \
+    CODIAD_DIR="/var/www/html/codiad" \
     # install webconsole
-    WEBCONSOLE_INSTALL=""
+    WEBCONSOLE_INSTALL="" \
+    WEBCONSOLE_DIR="/var/www/html/webconsole"
 
 EXPOSE 22 8000
-WORKDIR /home/cyclops
+WORKDIR "/var/www/html"
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
 

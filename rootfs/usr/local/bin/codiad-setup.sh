@@ -37,7 +37,7 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 		if [ ! -f "${CODIAD_SECRET}" ]; then
 			openssl rand -base64 10 > ${CODIAD_SECRET}
 		fi
-		APP_PASSWD="$(cat ${CODIAD_SECRET})"
+		APP_PASSWD="$(sudo cat ${CODIAD_SECRET})"
 	fi
 	DATA="path=${CODIAD_DIR}"
 	DATA+="&username=${APP_USER}"
