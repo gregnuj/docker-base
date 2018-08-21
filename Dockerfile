@@ -14,6 +14,7 @@ RUN set -ex \
     curl \
     cron \
     dnsutils \
+    gettext \
     git \
     gnupg2 \
     openssl \
