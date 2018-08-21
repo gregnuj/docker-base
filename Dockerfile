@@ -12,6 +12,7 @@ RUN set -ex \
     bind-tools \
     busybox-extras \
     curl \
+    gettext \
     git \
     libice \
     libsm \
