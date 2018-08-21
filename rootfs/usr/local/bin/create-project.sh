@@ -29,6 +29,10 @@ if [ -n "$PROJECT_GIT_URL" ]; then
 	fi
 fi
 
+if [ -n "$PROJECT_ENV" ]; then
+	ln -s "${HTDOCS_DIR}" "${HTDOCS_DIR}/${PROJECT_ENV}"
+fi
+
 # set/fix permissions for project
 if [ -d "${PROJECT_DIR}" ]; then
     chown -R ${APP_USER}:${APP_GROUP} ${PROJECT_DIR}
