@@ -1,10 +1,17 @@
 #!/bin/bash
 
-scripts=/etc/entrypoint.d/*
+TAG="$(basename $0 '.sh')"
 
-for script in ${scripts}; do 
-    echo "$0: running $script"
-    $script
+serials=/etc/entrypoint.d/serial/*
+for serial in ${serials}; do 
+    echo "$TAG: running $serial"
+    $serial
+done
+
+forks=/etc/entrypoint.d/fork/*
+for fork in ${forks}; do 
+    echo "$TAG: running $fork"
+    $fork &
 done
 
 exec $@

@@ -4,6 +4,7 @@
 export APP_USER="${APP_USER:-cyclops}"
 export SUPERVISOR_INI=${SUPERVISOR_INI:-/etc/supervisor.d/default.ini}
 export SUPERVISOR_SECRET="${SUPERVISOR_SECRET:-/var/run/secrets/app_password}"
+TAG="$(basename $0 '.sh')"
 
 # links supervisord files to debian location
 if [ -d "/etc/supervisor/conf.d" ]; then
@@ -23,6 +24,7 @@ fi
 
 
 # Set supervisor user/password 
+echo "${TAG} Setting user/pwd for webconsole"
 sed -i \
 	-e "s/^username = .*$/username = ${APP_USER}/" \
 	-e "s/^password = .*$/password = {SHA}${APP_PASSWD}/" \

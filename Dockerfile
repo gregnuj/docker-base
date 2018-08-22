@@ -77,8 +77,10 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     WEBCONSOLE_INSTALL="" \
     WEBCONSOLE_DIR="/var/www/localhost/htdocs/webconsole"
 
+# setuid for entrypoint
+RUN chmod 4755 "/usr/local/sbin/entrypoint.sh"
+
 EXPOSE 22 8000
 WORKDIR "/var/www/localhost/htdocs"
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
-

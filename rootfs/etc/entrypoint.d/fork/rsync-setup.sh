@@ -5,7 +5,10 @@ export APP_USER="${APP_USER:-cyclops}"
 export RSYNC_SECRET="${RSYNC_SECRET:-/var/run/secrets/app_password}"
 export RSYNC_SECRET_FILE="${RSYNC_SECRET_FILE:-/etc/rsync.secreta}"
 
+TAG="$(basename $0 '.sh')"
+
 # Get weconsole password 
+echo "${TAG} Setting user/pwd for rsync"
 if [ -z "${APP_PASSWD}" ]; then
 	# Create webconsole secret if it does not exist
 	if [ ! -f "${RSYNC_SECRET}" ]; then
