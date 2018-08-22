@@ -10,26 +10,26 @@ export APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
 export APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
 export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 
-<<<<<<< HEAD
 groupadd -g ${APP_GID} ${APP_USER}
 useradd -u ${APP_UID} -g ${APP_GID} ${APP_USER}
-=======
 
-if [ "${APP_UID}" -lt 256000 ]; then
-    addgroup -g ${APP_GID} ${APP_USER}
-    adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
-else 
-    # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
-    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:" >> /etc/passwd
-    echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
-    echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
-    cp /etc/skel ${APP_HOME} && chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
+# Get/change passwd (for sudo)
+if [ -z "${APP_PASSWD}" ]; then
+    # Create password if it does not exist
+    if [ -f "${APP_SECRET}" ]; then
+        openssl rand -base64 10 > ${APP_SECRET}
+    fi
+    APP_PASSWD="$(echo -n $(cat ${APP_SECRET}))"
 fi
->>>>>>> master
 
-echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.profile
+echo "${TAG}: Setting password for ${APP_USER}"
+echo "${APP_USER}:${APP_PASSWD}" | chpasswd
 
+# update sudoers
+echo "${TAG}: Adding sudo for ${APP_SUDO}"
+echo "${APP_SUDO} ALL=(ALL) ALL" >> /etc/sudoers
+
+echo "${TAG}: Adding ssh key in ${APP_SSH}"
 mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
     cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
@@ -41,5 +41,5 @@ else
 fi
 
 # needed for setup.ini
-chown -R ${APP_USER}:${APP_USER} /var/www
+echo "${TAG}: Setting ownership for ${APP_HOME}"
 chown -R ${APP_USER}:${APP_USER} ${APP_HOME}

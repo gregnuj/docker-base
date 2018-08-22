@@ -19,17 +19,22 @@ CODIAD_PROJECTS="${CODIAD_PROJECTS:-${CODIAD_DATA}/projects.php}"
 CODIAD_SETTINGS="${CODIAD_SETTINGS:-${CODIAD_DATA}/settings.php}"
 CODIAD_USERS="${CODIAD_USERS:-${CODIAD_DATA}/users.php}"
 CODIAD_TZ="${CODIAD_TZ:-America/Chicago}"
+TAG="$(basename $0 '.sh')"
+
 
 # Download and install
 if [ ! -e "${CODIAD_DIR}" ]; then
+       echo "${TAG} Cloning codiad to ${CODIAD_DIR}"
 	git clone https://github.com/Codiad/Codiad ${CODIAD_DIR}
 	sed -i -e 's/mb_ord/xmb_ord/g' -e 's/mb_chr/xmb_chr/g' ${CODIAD_DIR}/lib/diff_match_patch.php
 fi
 
 # set/fix permissions for codiad
+echo "${TAG} Setting owner of ${CODIAD_DIR} to ${APP_USER}"
 chown -R ${APP_USER}:${APP_GROUP} ${CODIAD_DIR}
 
 # populate users
+echo "${TAG} Setting user/pwd for codiad"
 if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJECTS}" ]]; then
 	# set variable for use in CODIAD_USERS
 	if [ -z "${APP_PASSWD}" ]; then
@@ -37,7 +42,7 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 		if [ ! -f "${CODIAD_SECRET}" ]; then
 			openssl rand -base64 10 > ${CODIAD_SECRET}
 		fi
-		APP_PASSWD="$(sudo cat ${CODIAD_SECRET})"
+		APP_PASSWD="$(cat ${CODIAD_SECRET})"
 	fi
 	DATA="path=${CODIAD_DIR}"
 	DATA+="&username=${APP_USER}"
@@ -53,5 +58,4 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 	done
 	curl -sSL http://127.0.0.1/$(basename $CODIAD_DIR)/components/install/process.php --data "${DATA}"
 fi
-
 
