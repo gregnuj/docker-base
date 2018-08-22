@@ -11,12 +11,16 @@ cd ${CONFIG_DIR}
 
 for dir in $(ls); do
 	for file in $(find $dir -type f); do
-		mkdir -p /$(dirname ${file})
+		dirname="$(dirname ${file})"
+		mode="$(stat -c '%a' ${CONFIG_DIR}/${file})"
+		if [ ! -d ${dirname} ]; then
+			mkdir -m ${mode} -p ${dirname}
+		fi
 		if grep -q 'SUBOFF'  <<<"$(head -n1 ${file})"; then
-			catt < "${CONFIG_DIR}/${file}" > "/${file}"
+			cat < "${CONFIG_DIR}/${file}" > "/${file}"
 		else
 			envsubst < "${CONFIG_DIR}/${file}" > "/${file}"
 		fi
-		chmod "$(stat -c '%a' ${CONFIG_DIR}/${file})" "/${file}"
+		chmod $mode "/${file}"
 	done
 done
