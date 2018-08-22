@@ -41,7 +41,7 @@ ADD ./rootfs /
 RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
-    && chmod 4755 '/usr/local/sbin/sshd-foreground' \
+    && chmod 4755 '/usr/local/sbin/sshd-setuid' \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/run/sshd
 
