@@ -1,1 +1,1 @@
-#!/usr/local/bin/rsync-setup.sh
+#!/usr/local/sbin/rsync-setup.sh

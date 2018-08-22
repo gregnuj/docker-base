@@ -23,7 +23,7 @@ else
 fi
 
 echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.profile
+echo "exec sudo -u "${APP_USER}" bash -l" >> /root/.bashrc
 
 mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then

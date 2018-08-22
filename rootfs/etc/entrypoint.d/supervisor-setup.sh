@@ -1,1 +1,1 @@
-#!/usr/local/bin/supervisor-setup.sh
+#!/usr/local/sbin/supervisor-setup.sh
