@@ -14,7 +14,7 @@ export APP_HOME="${APP_HOME:-/home/$APP_USER}"
 
 HOME="${APP_HOME}"
 
-gi tconfig --global user.name "${APP_USER}"
+git config --global user.name "${APP_USER}"
 git config --global user.email "${APP_EMAIL}"
 
 if [ -n "$PROJECT_GIT_URL" ]; then
