@@ -38,7 +38,10 @@ RUN set -ex \
 ADD ./rootfs /
 
 # Set Root to bash not ash and overwrite .bashrc
-RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
+RUN set -ex \
+    && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
+    && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
+    && chmod 4755 '/usr/local/sbin/sshd-foreground' \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/run/sshd
 
@@ -77,10 +80,8 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     WEBCONSOLE_INSTALL="" \
     WEBCONSOLE_DIR="/var/www/localhost/htdocs/webconsole"
 
-# setuid for entrypoint
-RUN chmod 4755 "/usr/local/sbin/entrypoint.sh"
-
-EXPOSE 22 8000
+EXPOSE 22 8000 9001
+VOLUME ["/var/www/localhost/htdocs"]
 WORKDIR "/var/www/localhost/htdocs"
 ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
