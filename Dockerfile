@@ -38,12 +38,10 @@ RUN set -ex \
 ADD ./rootfs /
 
 # Set Root to bash not ash and overwrite .bashrc
-RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd && \
-cp /etc/skel/.bashrc /root/.bashrc
-
-
-# Set Root to bash not ash and overwrite .bashrc
-RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
+RUN set -ex \
+    && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
+    && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
+    && chmod 4755 '/usr/local/sbin/sshd-setuid' \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/run/sshd
 
@@ -71,17 +69,19 @@ RUN sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     # defaults to /home/$APP_USER/.ssh/authorized_keys
     APP_AUTH="" \   
     # install adminer
+    HTDOCS_DIR="/var/www/localhost/htdocs" \   
+    # install adminer
     ADMINER_INSTALL="" \
-    ADMINER_DIR="/var/www/html/adminer" \
+    ADMINER_DIR="/var/www/localhost/htdocs/adminer" \
     # install codiad
     CODIAD_INSTALL="" \
-    CODIAD_DIR="/var/www/html/codiad" \
+    CODIAD_DIR="/var/www/localhost/htdocs/codiad" \
     # install webconsole
     WEBCONSOLE_INSTALL="" \
-    WEBCONSOLE_DIR="/var/www/html/webconsole"
+    WEBCONSOLE_DIR="/var/www/localhost/htdocs/webconsole"
 
-EXPOSE 22 8000
-WORKDIR "/var/www/html"
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+EXPOSE 22 8000 9001
+VOLUME ["/var/www/localhost/htdocs"]
+WORKDIR "/var/www/localhost/htdocs"
+ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
-
