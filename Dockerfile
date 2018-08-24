@@ -43,6 +43,7 @@ RUN set -ex \
     && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
     && chmod 4755 '/usr/local/sbin/sshd-setuid' \
     && cp /etc/skel/.bashrc /root/.bashrc \
+    && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd
 
 # Setup environment
