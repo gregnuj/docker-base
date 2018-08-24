@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # globals
-export APP_USER="${APP_USER:-cyclops}"
+export APP_USER="${APP_USER:-root}"
 export SUPERVISOR_INI=${SUPERVISOR_INI:-/etc/supervisor.d/default.ini}
 export SUPERVISOR_SECRET="${SUPERVISOR_SECRET:-/var/run/secrets/app_password}"
 TAG="$(basename $0 '.sh')"

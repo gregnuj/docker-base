@@ -49,17 +49,17 @@ RUN set -ex \
 # Setup environment
     ENV SHELL="/bin/bash" \
     EDITOR="/usr/local/bin/vim" \
-    # defaults to 'cyclops'
+    # defaults to 'root'
     APP_USER=""  \ 
     # defaults to random
     APP_PASSWD=""  \ 
-    # defaults to 10000
+    # defaults to `id -u`
     APP_UID="" \
     # defaults to $APP_USER
     APP_GROUP="" \ 
     # defaults to $APP_UID
     APP_SUDO=""  \ 
-    # defaults to $APP_USER
+    # defaults to `id -g`
     APP_GID=""   \ 
     # defaults to /home/$APP_USER
     APP_HOME=""  \ 

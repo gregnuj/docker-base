@@ -6,7 +6,7 @@ if [ -z "$CODIAD_INSTALL" ]; then
 fi
 
 # may need to set these
-export APP_USER="${APP_USER:-cyclops}"
+export APP_USER="${APP_USER:-root}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export PROJECT_DIR="${PROJECT_DIR:-$(pwd)/${APP_NAME}}"
 export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"

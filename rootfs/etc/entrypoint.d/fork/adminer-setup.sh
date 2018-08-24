@@ -6,6 +6,8 @@ if [ -z ${ADMINER_INSTALL} ]; then
 fi
 
 # globals
+export APP_USER="${APP_USER:-root}"
+export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"
 export ADMINER_DIR="${ADMINER_DIR:-${HTDOCS_DIR}/adminer}"
 

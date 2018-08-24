@@ -3,16 +3,13 @@
 # similar to composer --create-project
 # but does not require git vcs config in advance
 
-export APP_USER="${APP_USER:-cyclops}"
+export APP_USER="${APP_USER:-root}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export APP_EMAIL="${APP_EMAIL:-${APP_USER}@localhost}"
 export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html}"
 export PROJECT_DIR="${PROJECT_DIR:-${HTDOCS_DIR}/${APP_NAME}}"
 export PROJECT_GIT_URL="${PROJECT_GIT_URL}"
 export PROJECT_GIT_BRANCH="${PROJECT_GIT_BRANCH:-master}"
-export APP_HOME="${APP_HOME:-/home/$APP_USER}"
-
-HOME="${APP_HOME}"
 
 git config --global user.name "${APP_USER}"
 git config --global user.email "${APP_EMAIL}"
