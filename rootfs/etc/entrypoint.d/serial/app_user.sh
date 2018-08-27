@@ -33,11 +33,7 @@ fi
 if [ -z "${APP_PASSWD}" ]; then
     # Create password if it does not exist
     if [ ! -f "${APP_SECRET}" ]; then
-<<<<<<< HEAD
         mkdir -p "$(dirname ${APP_SECRET})"
-=======
-	mkdir -p "$(dirname ${APP_SECRET})"
->>>>>>> master
         openssl rand -base64 10 > ${APP_SECRET}
     fi
     APP_PASSWD="$(echo -n $(cat ${APP_SECRET}))"
