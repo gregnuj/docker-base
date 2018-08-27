@@ -45,7 +45,7 @@ sed -i \
 	-e "s/^\$USER = .*\$/\$USER = \"${APP_USER}\";/" \
 	-e "s/^\$PASSWORD = .*\$/\$PASSWORD = \"${APP_PASSWD}\";/" \
 	-e "s/^\$PASSWORD_HASH_ALGORITHM = .*\$/\$PASSWORD_HASH_ALGORITHM = \"sha256\";/" \
-	-e "s/^\$HOME_DIRECTORY = .*\$/\HOME_DIRECTORY = \"${APP_HOME}\";/" \
+	-e "s|^\$HOME_DIRECTORY = .*\$|\$HOME_DIRECTORY = \"${APP_HOME}\";|" \
 	${WEBCONSOLE_PHP}
 
 if [ ! -e "${WEBCONSOLE_DIR}/index.php" ]; then

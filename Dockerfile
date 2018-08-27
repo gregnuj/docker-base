@@ -40,9 +40,8 @@ ADD ./rootfs /
 # Set Root to bash not ash and overwrite .bashrc
 RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
-    && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
-    && chmod 4755 '/usr/local/sbin/sshd-setuid' \
     && cp /etc/skel/.bashrc /root/.bashrc \
+    && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd
 
 # Setup environment
@@ -56,9 +55,9 @@ RUN set -ex \
     APP_UID="" \
     # defaults to $APP_USER
     APP_GROUP="" \ 
-    # defaults to $APP_UID
-    APP_SUDO=""  \ 
     # defaults to $APP_USER
+    APP_SUDO=""  \ 
+    # defaults to $APP_UID
     APP_GID=""   \ 
     # defaults to /home/$APP_USER
     APP_HOME=""  \ 
@@ -83,5 +82,5 @@ RUN set -ex \
 EXPOSE 22 8000 9001
 VOLUME ["/var/www/localhost/htdocs"]
 WORKDIR "/var/www/localhost/htdocs"
-ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
