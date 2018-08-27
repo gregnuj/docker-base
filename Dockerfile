@@ -40,8 +40,7 @@ ADD ./rootfs /
 # Set Root to bash not ash and overwrite .bashrc
 RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
-    && chmod 4755 '/usr/local/sbin/entrypoint.sh' \
-    && chmod 4755 '/usr/local/sbin/sshd-setuid' \
+    && echo "ALL ALL=NOPASSWD: /usr/local/sbin/entrypoint.sh" >> /etc/sudoers \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd
