@@ -29,7 +29,7 @@ fi
 # Get/change passwd (for sudo)
 if [ -z "${APP_PASSWD}" ]; then
     # Create password if it does not exist
-    if [ -f "${APP_SECRET}" ]; then
+    if [ ! -f "${APP_SECRET}" ]; then
         mkdir -p "$(dirname ${APP_SECRET})"
         openssl rand -base64 10 > ${APP_SECRET}
     fi
