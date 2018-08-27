@@ -6,7 +6,7 @@ if [ -z ${WEBCONSOLE_INSTALL} ]; then
 fi
 
 # globals
-export APP_USER="${APP_USER:-root}"
+export APP_USER="${APP_USER:-cyclops}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
 export APP_HOME="${APP_HOME:-/home/${APP_USER}}"
 export HTDOCS_DIR="${HTDOCS_DIR:-/var/www/html/}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # globals
-export APP_USER="${APP_USER:-root}"
+export APP_USER="${APP_USER:-cyclops}"
 export RSYNC_SECRET="${RSYNC_SECRET:-/var/run/secrets/app_password}"
 export RSYNC_SECRET_FILE="${RSYNC_SECRET_FILE:-/etc/rsync.secreta}"
 
