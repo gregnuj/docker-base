@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $(id -u) -gt 0 ] then
+if [ $(id -u) -gt 0 ]; then
 	exec $0 $@
 fi
 
