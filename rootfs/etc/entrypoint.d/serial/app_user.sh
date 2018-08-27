@@ -15,7 +15,7 @@ TAG="$(basename $0 '.sh')"
 
 echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
 if [ "${APP_UID}" -lt 256000 ]; then
-    [ $id -u ${$APP_USER} ] || addgroup -g ${APP_GID} ${APP_USER}
+    [ $id -u ${$APP_USER} ] || addgroup -g ${APP_GID} ${APP_GROUP}
     adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
 else 
     # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
