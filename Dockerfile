@@ -40,7 +40,6 @@ ADD ./rootfs /
 # Set Root to bash not ash and overwrite .bashrc
 RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
-    && echo "ALL ALL=NOPASSWD: /usr/local/sbin/entrypoint.sh" >> /etc/sudoers \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd
@@ -83,5 +82,5 @@ RUN set -ex \
 EXPOSE 22 8000 9001
 VOLUME ["/var/www/localhost/htdocs"]
 WORKDIR "/var/www/localhost/htdocs"
-ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
