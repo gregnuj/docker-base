@@ -10,7 +10,10 @@ export APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
 export APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
 export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 export APP_SECRET="${APP_SECRET:-/var/run/secrets/app_password}"
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 TAG="$(basename $0 '.sh')"
 
@@ -30,7 +33,11 @@ fi
 if [ -z "${APP_PASSWD}" ]; then
     # Create password if it does not exist
     if [ ! -f "${APP_SECRET}" ]; then
+<<<<<<< HEAD
         mkdir -p "$(dirname ${APP_SECRET})"
+=======
+	mkdir -p "$(dirname ${APP_SECRET})"
+>>>>>>> master
         openssl rand -base64 10 > ${APP_SECRET}
     fi
     APP_PASSWD="$(echo -n $(cat ${APP_SECRET}))"
