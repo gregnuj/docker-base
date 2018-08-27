@@ -1,2 +1,2 @@
-# docker-cyclops-base
-cyclops base image
+# Cyclops base image
+These cyclops images are meant to provide full vm type functionality within a container.  The use case for these containers is to provide users server resources without providing them access to the server or the privilege elevation that is inherent in allowing a user to execute docker commands.  While the docker ethos is focused on a single process per container, I have not found this practical for some circumstances. These containers provide end users the ability to start and stop processes, access files and access databases without requiring any access to the server.
