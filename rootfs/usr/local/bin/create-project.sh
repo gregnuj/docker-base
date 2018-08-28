@@ -16,19 +16,21 @@ git config --global user.name "${APP_USER}"
 git config --global user.email "${APP_EMAIL}"
 
 if [ -n "$PROJECT_GIT_URL" ]; then
-	# sleep random amount to avoid collision
-	sleep $(( $RANDOM % 3 +  $RANDOM % 5 ))
-	if [ ! "$(ls -A ${PROJECT_DIR})" ]; then
-		git clone -b "$PROJECT_GIT_BRANCH" "$PROJECT_GIT_URL" "$PROJECT_DIR"
-	fi
-	cd $PROJECT_DIR
-	if [ -f "./composer.json" ]; then
-		composer update
-	fi
+    # sleep random amount to avoid collision
+    sleep $(( $RANDOM % 3 +  $RANDOM % 5 ))
+    if [ ! "$(ls -A ${PROJECT_DIR})" ]; then
+        git clone -b "$PROJECT_GIT_BRANCH" "$PROJECT_GIT_URL" "$PROJECT_DIR"
+    fi
+    cd $PROJECT_DIR
+    if [ -f "./composer.json" ]; then
+        composer update
+    fi
 fi
 
 if [ -n "$PROJECT_ENV" ]; then
-	ln -s "${HTDOCS_DIR}" "${HTDOCS_DIR}/${PROJECT_ENV}"
+    if [ ! -e "${HTDOCS_DIR}/${PROJECT_ENV}" ]; then
+         ln -s "${HTDOCS_DIR}" "${HTDOCS_DIR}/${PROJECT_ENV}"
+    fi 
 fi
 
 # set/fix permissions for project
