@@ -16,7 +16,7 @@ for dir in $(ls); do
         dirname="/$(dirname ${file})"
         mode="$(stat -c '%a' ${CONFIG_DIR}/${file})"
         if [ ! -d ${dirname} ]; then
-            mkdir -m ${mode} -p ${dirname}
+            mkdir -m 755 -p ${dirname}
         fi
         if grep -q 'SUBOFF'  <<<"$(head -n1 ${file})"; then
             cat < "${CONFIG_DIR}/${file}" > "/${file}"
