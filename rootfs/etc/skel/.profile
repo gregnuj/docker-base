@@ -3,3 +3,5 @@ if [ -r /etc/environment ]; then
     . /etc/environment
     set +o allexport
 fi
+
+export HOME="$(awk -F: "/$(id -u)/{print \$6}" /etc/passwd)"
