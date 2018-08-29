@@ -39,9 +39,15 @@ echo "${APP_USER}:${APP_PASSWD}" | chpasswd
 
 # update sudoers
 echo "${TAG}: Adding sudo for ${APP_SUDO}"
-echo "${APP_SUDO} ALL=(ALL) ALL" >> /etc/sudoers
+echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# root login su by default
+echo "su -p -l m81152" >> /root/.profile
 
+# store env in /etc/environment
+printenv | egrep -v '^(_|PWD|PHP|HOME)' | awk -F '=' '{print $1"=\""$2"\""}' >> /etc/environment
+
+# add ssh key
 echo "${TAG}: Adding ssh key in ${APP_SSH}"
 mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
