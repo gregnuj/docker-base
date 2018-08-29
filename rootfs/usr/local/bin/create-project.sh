@@ -23,7 +23,7 @@ if [ -n "$PROJECT_GIT_URL" ]; then
     fi
     cd $PROJECT_DIR
     if [ -f "./composer.json" ]; then
-        composer update
+        composer update -n
     fi
 fi
 
