@@ -5,7 +5,7 @@ export APP_GID="${APP_GID:-${APP_UID}}"
 export APP_USER="${APP_USER:-cyclops}"
 export APP_HOME="${APP_HOME:-/home/${APP_USER}}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
-export APP_SUDO="${APP_SUDO:-${APP_USER}}"
+export APP_SUDO="${APP_SUDO}"
 export APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
 export APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
 export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
@@ -21,7 +21,9 @@ else
     echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:" >> /etc/passwd
     echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
-    cp /etc/skel ${APP_HOME} && chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
+    cp -a /etc/skel ${APP_HOME}
+    chown -R ${APP_USER} ${APP_HOME}
+    chown -R ${APP_GID} ${APP_HOME}
 fi
 
 # Get/change passwd (for sudo)
@@ -37,8 +39,10 @@ echo "${TAG}: Setting password for ${APP_USER}"
 echo "${APP_USER}:${APP_PASSWD}" | chpasswd
 
 # update sudoers
-echo "${TAG}: Adding sudo for ${APP_SUDO}"
-echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+if [ -n "${APP_SUDO}" ]; then
+    echo "${TAG}: Adding sudo for ${APP_SUDO}"
+    echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+fi
 
 # root login su by default
 echo "su -p -l m81152" >> /root/.profile
