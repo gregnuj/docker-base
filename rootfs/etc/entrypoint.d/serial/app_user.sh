@@ -23,7 +23,8 @@ else
     echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
     cp /etc/skel ${APP_HOME}
-    chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
+    chown -R ${APP_USER} ${APP_HOME}
+    chown -R ${APP_GID} ${APP_HOME}
 fi
 
 # Get/change passwd (for sudo)
