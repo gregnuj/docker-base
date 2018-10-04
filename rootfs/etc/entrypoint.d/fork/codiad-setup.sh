@@ -56,6 +56,6 @@ if [[ ! -f "${CODIAD_USERS}" || ! -f "${CODIAD_PROJECTS}" || ! -f "${CODIAD_PROJ
 	for file in ${CODIAD_DATA}/*.php; do
 		rm $file
 	done
-	curl -sSL --connect-timeout=30 http://127.0.0.1/$(basename $CODIAD_DIR)/components/install/process.php --data "${DATA}"
+	curl -sSL --connect-timeout 30 http://127.0.0.1/$(basename $CODIAD_DIR)/components/install/process.php --data "${DATA}"
 fi
 
