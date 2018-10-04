@@ -24,7 +24,7 @@ else
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
     cp -a /etc/skel ${APP_HOME}
     chown -R ${APP_USER} ${APP_HOME}
-    chown -R ${APP_GID} ${APP_HOME}
+    chgrp -R ${APP_GID} ${APP_HOME}
 fi
 
 # Get/change passwd (for sudo)
