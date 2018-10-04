@@ -23,8 +23,7 @@ else
     echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
     cp -a /etc/skel ${APP_HOME}
-    chown -R ${APP_USER} ${APP_HOME}
-    chgrp -R ${APP_GID} ${APP_HOME}
+    chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
 fi
 
 # Get/change passwd (for sudo)
@@ -65,7 +64,7 @@ fi
 
 # needed for setup.ini
 echo "${TAG}: Setting ownership for ${APP_HOME}"
-chown -R ${APP_USER}:${APP_USER} ${APP_HOME}
+chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
 
 # use APP_HOME as HOME
 export HOME="${APP_HOME}"
