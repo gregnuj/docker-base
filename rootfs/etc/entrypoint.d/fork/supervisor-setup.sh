@@ -30,3 +30,8 @@ sed -i \
 	-e "s/^password = .*$/password = {SHA}${APP_PASSWD}/" \
 	${SUPERVISOR_INI}
 
+# chmod conf file 
+chmod -R go+rX /etc/supervisor*
+
+# chmod log file
+chmod -R go+rX /var/log/supervisor*
