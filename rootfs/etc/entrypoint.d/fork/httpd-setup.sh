@@ -12,3 +12,5 @@ TAG="$(basename $0 '.sh')"
 echo "${TAG} Setting owner of ${HTDOCS_DIR} to ${APP_USER}"
 chown -R ${APP_USER}:${APP_GROUP} ${HTDOCS_DIR}
 
+# chmod log file
+chmod -R go+rX /var/log
