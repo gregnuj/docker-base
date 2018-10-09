@@ -44,6 +44,11 @@ if [ -n "${APP_SUDO}" ]; then
     echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 fi
 
+# APP user can sudo supervisorctl
+echo "${TAG}: Adding sudo for ${APP_SUDO}"
+echo "${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl" >> /etc/sudoers
+echo "alias supervisorctl='sudo /usr/bin/supervisorctl'" >> "${APP_HOME}/.bashrc"
+
 # root login su by default
 echo "su -p -l m81152" >> /root/.profile
 
