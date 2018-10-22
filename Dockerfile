@@ -14,6 +14,7 @@ RUN set -ex \
     curl \
     gettext \
     git \
+    less \
     libice \
     libsm \
     libx11 \
