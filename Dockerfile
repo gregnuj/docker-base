@@ -16,7 +16,14 @@ RUN set -ex \
     dnsutils \
     gettext \
     git \
-    gnupg2 \
+    less \
+    libice \
+    libsm \
+    libx11 \
+    libxt \
+    ncurses \
+    nmap \
+    nodejs \
     openssl \
     socat \
     ssh \
