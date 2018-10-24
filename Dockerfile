@@ -17,7 +17,7 @@ RUN set -ex \
     gettext \
     git \
     gnupg2 \
-    openjdk \
+    openjdk-8-jre \
     openssl \
     socat \
     ssh \
