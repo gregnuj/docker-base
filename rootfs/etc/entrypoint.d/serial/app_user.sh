@@ -46,10 +46,7 @@ fi
 # APP user can sudo supervisorctl
 echo "${TAG}: Adding sudo for ${APP_SUDO}"
 echo "${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl" >> /etc/sudoers
-echo "alias supervisorctl='sudo /usr/bin/supervisorctl'" >> "${APP_HOME}/.bashrc"
-
-# root login su by default
-echo "su -p -l m81152" >> /root/.profile
+echo "alias supervisorctl='sudo /usr/bin/supervisorctl'" >> ${APP_HOME}/.bashrc
 
 # store env in /etc/environment
 printenv | egrep -v '^(_|PWD|PHP|HOME)' | awk -F '=' '{print $1"=\""$2"\""}' >> /etc/environment
@@ -60,10 +57,10 @@ mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
     cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
     chmod 400 ${APP_SSH}/$(basename ${APP_KEY})
-    ssh-keygen -y -f ${APP_KEY} > ${APP_AUTH}
+    ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
 else
     ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
-    cp ${APP_KEY}.pub ${APP_AUTH}
+    cat ${APP_KEY}.pub >> ${APP_AUTH}
 fi
 
 # needed for setup.ini
