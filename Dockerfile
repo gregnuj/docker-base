@@ -22,6 +22,7 @@ RUN set -ex \
     ncurses \
     nmap \
     nodejs \
+    openjdk8 \
     #openssl \
     openssh \
     php7 \
