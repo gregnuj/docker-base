@@ -19,6 +19,7 @@ RUN set -ex \
     gnupg2 \
     openjdk-8-jre \
     openssl \
+    ssh-askpass \
     socat \
     ssh \
     sudo \
