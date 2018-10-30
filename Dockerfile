@@ -25,7 +25,6 @@ RUN set -ex \
     openjdk8 \
     openssl \
     openssh \
-    openssh-askpass \
     php7 \
     php7-json \
     rsync \
