@@ -5,6 +5,9 @@ USER root
 # To enable build behind proxy
 ARG http_proxy
 
+# required by openjdk-8-jre
+RUN mkdir -p /usr/share/man/man1/
+
 # Install packages
 RUN set -ex \
     && apt-get update \
