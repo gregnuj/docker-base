@@ -70,6 +70,3 @@ chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
 # use APP_HOME as HOME
 export HOME="${APP_HOME}"
 
-# vim settings
-sudo -u ${APP_USER} git clone --depth=1 https://github.com/amix/vimrc.git ${APP_HOME}/.vim_runtime
-sudo -u ${APP_USER} sh ${APP_HOME}/.vim_runtime/install_basic_vimrc.sh
