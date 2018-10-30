@@ -48,7 +48,7 @@ RUN set -ex \
 
 # Setup environment
     ENV SHELL="/bin/bash" \
-    EDITOR="/usr/local/bin/vim" \
+    EDITOR="/usr/bin/vim" \
     # defaults to 'cyclops'
     APP_USER=""  \ 
     # defaults to random
