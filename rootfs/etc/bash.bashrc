@@ -1,3 +1,4 @@
+#!/bin/bash
 # print motd
 [ -z "$SUDO_UID" ] && 
 [ ! -z "$TERM" ] && 
