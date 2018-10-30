@@ -16,10 +16,10 @@ TAG="$(basename $0 '.sh')"
 echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
 if [ "${APP_UID}" -lt 256000 ]; then
     addgroup -g ${APP_GID} ${APP_GROUP}
-    adduser -D -u ${APP_UID} -G ${APP_USER} ${APP_USER}
+    adduser -D -u ${APP_UID} -G ${APP_USER} -s /bin/bash ${APP_USER}
 else 
     # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
-    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:" >> /etc/passwd
+    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:/bin/bash" >> /etc/passwd
     echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
     echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
     cp -a /etc/skel ${APP_HOME}
@@ -47,7 +47,6 @@ fi
 # APP user can sudo supervisorctl
 echo "${TAG}: Adding sudo for ${APP_SUDO}"
 echo "${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl" >> /etc/sudoers
-echo "alias supervisorctl='sudo /usr/bin/supervisorctl'" >> ${APP_HOME}/.bashrc
 
 # store env in /etc/environment
 printenv | egrep -v '^(_|PWD|PHP|HOME)' | awk -F '=' '{print $1"=\""$2"\""}' >> /etc/environment
@@ -70,3 +69,4 @@ chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
 
 # use APP_HOME as HOME
 export HOME="${APP_HOME}"
+
