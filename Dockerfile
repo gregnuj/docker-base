@@ -70,10 +70,12 @@ RUN set -ex \
     APP_HOME=""  \ 
     # defaults to /home/$APP_USER/.ssh
     APP_SSH=""   \ 
+    # defaults to /home/$APP_USER/.ssh
+    APP_TYPE=""   \ 
     # defaults to /home/$APP_USER/.ssh/id_rsa
     APP_KEY=""   \ 
     # defaults to /home/$APP_USER/.ssh/authorized_keys
-    APP_AUTH="" \   
+    APP_AUTH="" \
     # install adminer
     HTDOCS_DIR="/var/www/localhost/htdocs" \   
     # install adminer
@@ -84,7 +86,11 @@ RUN set -ex \
     CODIAD_DIR="/var/www/localhost/htdocs/codiad" \
     # install webconsole
     WEBCONSOLE_INSTALL="" \
-    WEBCONSOLE_DIR="/var/www/localhost/htdocs/webconsole"
+    WEBCONSOLE_DIR="/var/www/localhost/htdocs/webconsole" \
+    # used in some scripts
+    SSH_PORT="22" \   
+    DATA_PORT="3306" \   
+    WEB_PORT="80"    
 
 EXPOSE 22 8000 9001
 VOLUME ["/var/www/localhost/htdocs"]
