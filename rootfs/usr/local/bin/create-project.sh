@@ -14,6 +14,7 @@ export NPM_CONFIG_PREFIX="${PROJECT_DIR}/.npm-global"
 
 git config --global user.name "${APP_USER}"
 git config --global user.email "${APP_EMAIL}"
+git config --global credential.helper store
 
 if [ -n "$PROJECT_GIT_URL" ]; then
     # sleep random amount to avoid collision
