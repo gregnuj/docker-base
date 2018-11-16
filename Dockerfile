@@ -47,7 +47,8 @@ RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/log/supervisord \
-    && mkdir -p /var/run/sshd
+    && mkdir -p /var/run/sshd \
+    && chmod 4755 /usr/bin/crontab
 
 # Setup environment
     ENV SHELL="/bin/bash" \
