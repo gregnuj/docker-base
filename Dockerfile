@@ -48,7 +48,8 @@ RUN set -ex \
     && cp /etc/skel/.bashrc /root/.bashrc \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd \
-    && chmod 4755 /usr/bin/crontab
+    && chmod 4755 /usr/bin/crontab \
+    && git config --global credential.helper store
 
 # Setup environment
     ENV SHELL="/bin/bash" \
