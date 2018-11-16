@@ -11,10 +11,12 @@ RUN set -ex \
     bash \
     bind-tools \
     busybox-extras \
+    busybox-suid \
     curl \
     dcron \
     gettext \
     git \
+    grep \
     less \
     libice \
     libsm \
