@@ -56,7 +56,11 @@ mkdir -p ${APP_SSH}
 if [ -f "${APP_KEY}" ]; then
     cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
     chmod 400 ${APP_SSH}/$(basename ${APP_KEY})
-    ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
+    if [ -f "${APP_KEY}.pub" ]; then
+        cat "${APP_KEY}.pub" >> ${APP_AUTH}
+    else
+    	ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
+    fi
 else
     ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
     cat ${APP_KEY}.pub >> ${APP_AUTH}
