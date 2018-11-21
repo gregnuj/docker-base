@@ -5,6 +5,7 @@ export APP_GID="${APP_GID:-${APP_UID}}"
 export APP_USER="${APP_USER:-cyclops}"
 export APP_HOME="${APP_HOME:-/home/${APP_USER}}"
 export APP_GROUP="${APP_GROUP:-${APP_USER}}"
+export APP_EMAIL="${APP_EMAIL:-${APP_USER}}"
 export APP_SUDO="${APP_SUDO}"
 export APP_SSH="${APP_SSH:-${APP_HOME}/.ssh}"
 export APP_KEY="${APP_KEY:-${APP_SSH}/id_rsa}"
@@ -12,6 +13,11 @@ export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 export APP_SECRET="${APP_SECRET:-/var/run/secrets/app_password}"
 
 TAG="$(basename $0 '.sh')"
+
+# git settings
+git config --global user.name "${APP_USER}"
+git config --global user.email "${APP_EMAIL}"
+git config --global credential.helper store
 
 echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
 if [ "${APP_UID}" -lt 256000 ]; then
