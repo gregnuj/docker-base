@@ -20,6 +20,7 @@ RUN set -ex \
     gettext \
     git \
     gnupg2 \
+    msmtp \
     openjdk-8-jre \
     openssl \
     ssh-askpass \
