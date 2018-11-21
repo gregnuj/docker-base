@@ -14,6 +14,11 @@ export APP_SECRET="${APP_SECRET:-/var/run/secrets/app_password}"
 
 TAG="$(basename $0 '.sh')"
 
+# git settings
+git config --global user.name "${APP_USER}"
+git config --global user.email "${APP_EMAIL}"
+git config --global credential.helper store
+
 echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
 if [ "${APP_UID}" -lt 256000 ]; then
     addgroup -g ${APP_GID} ${APP_GROUP}
