@@ -91,7 +91,8 @@ RUN set -ex \
     # used in some scripts
     SSH_PORT="22" \   
     DATA_PORT="3306" \   
-    WEB_PORT="80"    
+    WEB_PORT="80" \    
+    CRON_OPTS=""
 
 EXPOSE 22 8000 9001
 VOLUME ["/var/www/localhost/htdocs"]
