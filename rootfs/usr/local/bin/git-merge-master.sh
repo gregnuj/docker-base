@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -e
 
 git branch --format '%(refname:short)' | 
 while read branch; do 
