@@ -39,6 +39,4 @@ fi
 
 COLORIZED_PROMPT="${_COL_USER}\u${COL_WHI}@${COL_YEL}\h${COL_WHI}:${COL_BLU}\w${_p}\[\e[m\]"
 
-if [ -f ~/.bashrc ]; then
-	source ~/.bashrc
-fi
+

@@ -22,6 +22,7 @@ RUN set -ex \
     libsm \
     libx11 \
     libxt \
+    msmtp \
     ncurses \
     nmap \
     nodejs \
