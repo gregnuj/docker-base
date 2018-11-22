@@ -60,7 +60,7 @@ RUN set -ex \
     && mkdir -p /var/run/sshd \
     && chmod 4755 /usr/bin/crontab \
     && rm /usr/sbin/sendmail \
-    && ln -s /usr/bin/msmtp /usr/sbin/sendmail 
+    && ln -s /usr/bin/msmtp /usr/sbin/sendmail \
     && git config --global credential.helper store
 
 # Setup environment
