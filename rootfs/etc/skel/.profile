@@ -5,3 +5,9 @@ if [ -r /etc/environment ]; then
 fi
 
 export HOME="$(awk -F: "/$(id -u)/{print \$6}" /etc/passwd)"
+
+# include user bashrc
+if [ -f $HOME/.bashrc ]; then
+	. $HOME/.bashrc
+fi
+
