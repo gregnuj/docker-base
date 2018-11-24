@@ -79,6 +79,10 @@ fi
 echo "${TAG}: Setting ownership for ${APP_HOME}"
 chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
 
+# msmtp
+touch /var/log/msmtp/${APP_USER}.log
+chown -R ${APP_USER}:${APP_GROUP} /var/log/msmtp/${APP_USER}.log
+
 # use APP_HOME as HOME
 export HOME="${APP_HOME}"
 
