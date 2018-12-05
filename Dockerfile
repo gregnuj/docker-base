@@ -60,8 +60,11 @@ RUN set -ex \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd \
     && mkdir -p /var/log/msmtp \
-    && rm /usr/sbin/sendmail \
+    && if [ -e /usr/bin/sendmail ]; then rm -f /usr/sbin/sendmail; fi \
     && ln -s /usr/bin/msmtp /usr/sbin/sendmail \
+    && if [ -e /var/www/html ]; then rm -rf /var/www/html; fi \
+    && mkdir -p /var/www/localhost/htdocs \
+    && ln -s /var/www/localhost/htdocs /var/www/html \
     && git config --global credential.helper store
 
 # Setup environment
