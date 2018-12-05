@@ -56,7 +56,7 @@ ADD ./rootfs /
 RUN set -ex \
     && sed -i 's/root:\/bin\/ash/root:\/bin\/bash/' /etc/passwd \
     && cp /etc/skel/.bashrc /root/.bashrc \
-    && chmod 4755 /usr/bin/crontab \
+    && chmod 2755 /usr/bin/crontab \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd \
     && mkdir -p /var/log/msmtp \
