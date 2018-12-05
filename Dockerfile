@@ -60,7 +60,7 @@ RUN set -ex \
     && mkdir -p /var/log/supervisord \
     && mkdir -p /var/run/sshd \
     && mkdir -p /var/log/msmtp \
-    && if [ -e /usr/bin/sendmail ]; then rm -f /usr/sbin/sendmail; fi \
+    && if [ -e /usr/sbin/sendmail ]; then rm -f /usr/sbin/sendmail; fi \
     && ln -s /usr/bin/msmtp /usr/sbin/sendmail \
     && if [ -e /var/www/html ]; then rm -rf /var/www/html; fi \
     && mkdir -p /var/www/localhost/htdocs \
