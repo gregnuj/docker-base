@@ -16,6 +16,7 @@ RUN set -ex \
     ca-certificates \
     curl \
     cron \
+    dirmngr \
     dnsutils \
     gettext \
     git \
