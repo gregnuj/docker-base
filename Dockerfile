@@ -110,4 +110,4 @@ EXPOSE 22 8000 9001
 VOLUME ["/var/www/localhost/htdocs"]
 WORKDIR "/var/www/localhost/htdocs"
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor.d/default.ini"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
