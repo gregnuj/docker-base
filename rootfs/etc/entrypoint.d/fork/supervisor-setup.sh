@@ -2,7 +2,7 @@
 
 # globals
 export APP_USER="${APP_USER:-cyclops}"
-export SUPERVISOR_INI=${SUPERVISOR_INI:-/etc/supervisor.d/default.ini}
+export SUPERVISOR_INI=${SUPERVISOR_INI:-/etc/supervisord.conf}
 export SUPERVISOR_SECRET="${SUPERVISOR_SECRET:-/var/run/secrets/app_password}"
 TAG="$(basename $0 '.sh')"
 
