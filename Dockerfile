@@ -40,19 +40,6 @@ RUN set -ex \
     wget \
     yarn 
 
-ENV GLIBC_VERSION 2.28-r0
-
-# Download and install glibc
-RUN set -ex \
-  && cd /tmp \
-  && curl -Lo /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-  && curl -Lo glibc.apk "https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk" \
-  && curl -Lo glibc-bin.apk "https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk" \
-  && apk add --no-cache glibc-bin.apk glibc.apk \
-  && /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib \
-  && echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf \
-  && rm -rf glibc.apk glibc-bin.apk 
-
 # add files in rootfs
 ADD ./rootfs /
 
