@@ -24,5 +24,10 @@ for dir in $(ls); do
             envsubst < "${CONFIG_DIR}/${file}" > "/${file}"
         fi
         chmod $mode "/${file}"
+
+	# run script if its target is this dir
+        if [ "${dirname}" == "/etc/entrypoint.d/serial" ]; then
+		"/$file"
+	fi
     done
 done
