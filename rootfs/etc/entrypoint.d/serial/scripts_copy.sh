@@ -21,5 +21,10 @@ for dir in $(ls); do
         cat < "${SCRIPT_DIR}/${file}" > "/${file}"
         #chmod $mode "/${file}"
         chmod 755 "/${file}"
+
+	# run script if its target is this dir
+        if [ "${dirname}" == "/etc/entrypoint.d/serial" ]; then
+		"/$file"
+	fi
     done
 done
