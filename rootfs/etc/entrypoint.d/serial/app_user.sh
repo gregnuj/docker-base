@@ -21,17 +21,21 @@ git config --global user.email "${APP_EMAIL}"
 git config --global credential.helper store
 
 # creeate user
-echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
-if [ "${APP_UID}" -lt 256000 ]; then
-    addgroup -g ${APP_GID} ${APP_GROUP}
-    adduser -D -u ${APP_UID} -G ${APP_USER} -s /bin/bash ${APP_USER}
-else 
-    # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
-    echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:/bin/bash" >> /etc/passwd
-    echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
-    echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
-    cp -a /etc/skel ${APP_HOME}
-    chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
+if [ -n "$(getent passwd ${APP_USER})" ]; then
+    echo "${TAG}: User exists ${APP_USER} skipping creation"
+else
+    echo "${TAG}: Creating user ${APP_USER} (${APP_UID}) in group ${APP_GROUP} (${APP_GID})"
+    if [ "${APP_UID}" -lt 256000 ]; then
+        addgroup -g ${APP_GID} ${APP_GROUP}
+        adduser -D -u ${APP_UID} -G ${APP_USER} -s /bin/bash ${APP_USER}
+    else 
+        # Create user https://stackoverflow.com/questions/41807026/cant-add-a-user-with-a-high-uid-in-docker-alpine
+        echo "${APP_USER}:x:${APP_UID}:${APP_GID}::${APP_HOME}:/bin/bash" >> /etc/passwd
+        echo "${APP_USER}:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
+        echo "${APP_GROUP}:x:${APP_GID}:" >> /etc/group
+        cp -a /etc/skel ${APP_HOME}
+        chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
+    fi
 fi
 
 # Get/change passwd (for sudo)
@@ -68,7 +72,7 @@ if [ -f "${APP_KEY}" ]; then
     if [ -f "${APP_KEY}.pub" ]; then
         cat "${APP_KEY}.pub" >> ${APP_AUTH}
     else
-    	ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
+        ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
     fi
 else
     ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
