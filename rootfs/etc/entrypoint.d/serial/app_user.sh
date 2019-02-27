@@ -13,12 +13,8 @@ export APP_AUTH="${APP_AUTH:-${APP_SSH}/authorized_keys}"
 export APP_SECRET="${APP_SECRET:-/var/run/secrets/app_password}"
 export CRON_MAILTO="${CRON_MAILTO:-${APP_EMAIL}}"
 
+# script name for logging
 TAG="$(basename $0 '.sh')"
-
-# git settings
-git config --global user.name "${APP_USER}"
-git config --global user.email "${APP_EMAIL}"
-git config --global credential.helper store
 
 # creeate user
 if [ -n "$(getent passwd ${APP_USER})" ]; then
@@ -36,47 +32,44 @@ else
         cp -a /etc/skel ${APP_HOME}
         chown -R ${APP_USER}:${APP_GROUP} ${APP_HOME}
     fi
-fi
 
-# Get/change passwd (for sudo)
-if [ -z "${APP_PASSWD}" ]; then
-    # Create password if it does not exist
-    if [ ! -f "${APP_SECRET}" ]; then
-        mkdir -p "$(dirname ${APP_SECRET})"
-        openssl rand -base64 10 > ${APP_SECRET}
+    # Get/change passwd (for sudo)
+    if [ -z "${APP_PASSWD}" ]; then
+        # Create password if it does not exist
+        if [ ! -f "${APP_SECRET}" ]; then
+            mkdir -p "$(dirname ${APP_SECRET})"
+            openssl rand -base64 10 > ${APP_SECRET}
+        fi
+        APP_PASSWD="$(echo -n $(cat ${APP_SECRET}))"
     fi
-    APP_PASSWD="$(echo -n $(cat ${APP_SECRET}))"
-fi
-echo "${TAG}: Setting password for ${APP_USER}"
-echo "${APP_USER}:${APP_PASSWD}" | chpasswd
+    echo "${TAG}: Setting password for ${APP_USER}"
+    echo "${APP_USER}:${APP_PASSWD}" | chpasswd
 
-# update sudoers
-if [ -n "${APP_SUDO}" ]; then
-    echo "${TAG}: Adding sudo for ${APP_SUDO}"
-    echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-fi
+    # update sudoers
+    if [ -n "${APP_SUDO}" ]; then
+        echo "${TAG}: Adding sudo for ${APP_SUDO}"
+        echo "${APP_SUDO} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    fi
 
-# APP user can sudo supervisorctl
-echo "${TAG}: Adding sudo for ${APP_SUDO}"
-echo "${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl" >> /etc/sudoers
+    # APP user can sudo supervisorctl
+    echo "${TAG}: Adding sudo for supervisorctl for ${APP_USER}"
+    echo "${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/supervisorctl" >> /etc/sudoers
 
-# store env in /etc/environment
-printenv | egrep -v '^(_|PWD|PHP|HOME)' | awk -F '=' '{print $1"=\""$2"\""}' >> /etc/environment
-
-# add ssh key
-echo "${TAG}: Adding ssh key in ${APP_SSH}"
-mkdir -p ${APP_SSH}
-if [ -f "${APP_KEY}" ]; then
-    cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
-    chmod 400 ${APP_SSH}/$(basename ${APP_KEY})
-    if [ -f "${APP_KEY}.pub" ]; then
-        cat "${APP_KEY}.pub" >> ${APP_AUTH}
+    # add ssh key
+    echo "${TAG}: Adding ssh key in ${APP_SSH}"
+    mkdir -p ${APP_SSH}
+    if [ -f "${APP_KEY}" ]; then
+        cp ${APP_KEY} ${APP_SSH}/$(basename ${APP_KEY})
+        chmod 400 ${APP_SSH}/$(basename ${APP_KEY})
+        if [ -f "${APP_KEY}.pub" ]; then
+            cat "${APP_KEY}.pub" >> ${APP_AUTH}
+        else
+            ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
+        fi
     else
-        ssh-keygen -y -f ${APP_KEY} >> ${APP_AUTH}
+        ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
+        cat ${APP_KEY}.pub >> ${APP_AUTH}
     fi
-else
-    ssh-keygen -q -t rsa -N '' -f ${APP_KEY}
-    cat ${APP_KEY}.pub >> ${APP_AUTH}
 fi
 
 # needed for setup.ini
