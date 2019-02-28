@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.8
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 USER root
 
